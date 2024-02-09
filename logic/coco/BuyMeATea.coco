@@ -1,0 +1,61 @@
+// Coco BuyMeACoffeePlatform
+coco BuyMeATea
+
+// Declare Persistent State
+state persistent:
+    donations []Donation
+    // owner Address
+    // balanceOf map[Address]U64
+
+// Declare Donation Class
+class Donation:
+    field donationId U64            // Unique identifier for each donation
+    field recipient Address         // Address of the content creator receiving the donation
+    field amount U64                // Amount of the donation
+    field message String            // Optional message from the donor
+
+////////////////////////
+// Mutate Endpoints
+///////////////////////
+endpoint deployer Init!():
+    pass
+
+
+// func transfer!(from Address, to Address, value U64):
+//     if from == Address(0):
+//         throw "Invalid Sender Address"
+//     if to == Address(0):
+//         throw "Invalid Recipient Address"
+    
+//     mutate balanceOf <- BuyMeATea.State.balanceOf:
+//         if balanceOf[from] < value:
+//             throw "Insufficient Balance"
+        
+//         balanceOf[from] -= value
+//         balanceOf[to] += value
+
+// Note: "!" required as suffix for mutate endpoints
+
+// Make a new donation
+endpoint invokable MakeDonation!(recipient Address, amount U64, message String)->(MadeDonation Donation):
+    // Check if amount is greater than 0
+    if amount <= 0 :
+        throw "Insufficient Amount"
+    else :
+    // Add new donation to the list by incrementing the donationId and appending to donations array
+        mutate donations <- BuyMeATea.State.donations:
+            var newDonation = Donation{donationId : len(donations), recipient: recipient, amount: amount, message : message }
+            donations = append(donations,newDonation)
+    // Yield the made donation to the caller
+            yield MadeDonation newDonation
+
+////////////////////////
+// Observe Endpoints
+///////////////////////
+
+// Note: No "!" required as suffix for observe endpoints
+
+// Get all donations
+endpoint invokable GetDonations()->(donations []Donation):
+    // Observe donations from the persistent state and yield
+    observe donations <- BuyMeATea.State.donations
