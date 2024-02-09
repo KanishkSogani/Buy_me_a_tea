@@ -19,7 +19,10 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div
+      className="app"
+      style={{ height: "100vh", width: "100vw", backgroundColor: "#FFFEFE" }}
+    >
       <Navbar
         updateWallet={updateWallet}
         wallet={wallet}
