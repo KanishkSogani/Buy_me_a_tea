@@ -156,14 +156,5 @@ endpoint invokable Allowances(owner Address, spender Address)->(allowance U64):
     observe allowances <- BuyMeATea.State.allowances:
         yield allowance allowances[owner][spender]
 
-
-
-
-// endpoint invokable AddDonation!(teaAmount U64, recipient Address, messageString) -> (AddedDoantion Donation):
-//     if amount <= 0:
-//         throw "Invalid Amount"
-    
-//     var newDonation = Donation{}
-
 endpoint invokable SeeCampaign() -> (campaigns []TeaCampaign):
     observe campaigns <- BuyMeATea.State.campaigns

@@ -63,7 +63,7 @@ function Home() {
               fullWidth="true"
             />
             <br />
-            <Typography variant="h6">Amount:</Typography>
+            <Typography variant="h6">Tea:</Typography>
             <TextField
               onChange={(e) => {
                 setAmount(e.target.value * 5);
