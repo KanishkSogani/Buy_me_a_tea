@@ -1,61 +1,169 @@
-// Coco BuyMeACoffeePlatform
 coco BuyMeATea
 
-// Declare Persistent State
 state persistent:
-    donations []Donation
-    // owner Address
-    // balanceOf map[Address]U64
-
-// Declare Donation Class
-class Donation:
-    field donationId U64            // Unique identifier for each donation
-    field recipient Address         // Address of the content creator receiving the donation
-    field amount U64                // Amount of the donation
-    field message String            // Optional message from the donor
-
-////////////////////////
-// Mutate Endpoints
-///////////////////////
-endpoint deployer Init!():
-    pass
+    // Token Variables
+    name String
+    symbol String
+    decimals U64
+    totalSupply U64
+    balanceOf Map[Address]U64
+    allowances Map[Address]Map[Address]U64
+    nextClaims Map[Address]I64
+    campaigns []TeaCampaign
 
 
-// func transfer!(from Address, to Address, value U64):
-//     if from == Address(0):
-//         throw "Invalid Sender Address"
-//     if to == Address(0):
-//         throw "Invalid Recipient Address"
+class TeaCampaign:
+    field campaignId U64
+    field owner Address
+    field contributors Map[Address]U64   //Contributors Address => Amount
+    field teaPrice U64
+    field totalTeas U64
+
+const CLAIM_AMOUNT U64 = 10000
+const CLAIM_INTERVAL I64 = 3600  // every 1 hour
+
+endpoint deployer Init!(name String,symbol String, decimals U64,totalSupply U64):
+    mutate name -> BuyMeATea.State.name
+    mutate symbol -> BuyMeATea.State.symbol
+    mutate decimals -> BuyMeATea.State.decimals
+
+    mint!(account: Address(Sender), value: totalSupply)
     
-//     mutate balanceOf <- BuyMeATea.State.balanceOf:
-//         if balanceOf[from] < value:
-//             throw "Insufficient Balance"
+
+func transfer!(from Address, to Address, value U64):
+    if from == Address(0):
+        throw "Invalid Sender Address"
+    if to == Address(0):
+        throw "Invalid Recipient Address"
+    
+    mutate balanceOf <- BuyMeATea.State.balanceOf:
+        if balanceOf[from] < value:
+            throw "Insufficient Balance"
         
-//         balanceOf[from] -= value
-//         balanceOf[to] += value
+        balanceOf[from] -= value
+        balanceOf[to] += value
 
-// Note: "!" required as suffix for mutate endpoints
 
-// Make a new donation
-endpoint invokable MakeDonation!(recipient Address, amount U64, message String)->(MadeDonation Donation):
-    // Check if amount is greater than 0
-    if amount <= 0 :
-        throw "Insufficient Amount"
-    else :
-    // Add new donation to the list by incrementing the donationId and appending to donations array
-        mutate donations <- BuyMeATea.State.donations:
-            var newDonation = Donation{donationId : len(donations), recipient: recipient, amount: amount, message : message }
-            donations = append(donations,newDonation)
-    // Yield the made donation to the caller
-            yield MadeDonation newDonation
+func mint!(account Address, value U64):
+    if account == Address(0):
+        throw "Invalid Receiver Address"
+
+    mutate totalSupply <- BuyMeATea.State.totalSupply:
+        totalSupply += value
+
+    mutate balanceOf <- BuyMeATea.State.balanceOf:
+        balanceOf[account] += value
+
+
+func burn!(account Address, value U64):
+    if account == Address(0):
+        throw "Invalid Sender Address"
+
+    mutate totalSupply <- BuyMeATea.State.totalSupply:
+        totalSupply -= value
+
+    mutate balanceOf <- BuyMeATea.State.balanceOf:
+        balanceOf[account] -= value
+
+
+endpoint invokable Transfer!(to Address, value U64):
+    transfer!(from: Address(Sender), to, value)
+
+
+endpoint invokable Approve!(spender Address, value U64):
+    if spender == Address(0):
+        throw "Invalid Spender Address"
+
+    var owner = Address(Sender)
+
+    mutate allowances <- BuyMeATea.State.allowances:
+        allowances[owner][spender] = value
+
+
+endpoint invokable TransferFrom!(from Address, to Address, value U64):
+    var spender = Address(Sender)
+    
+    mutate allowances <- BuyMeATea.State.allowances:
+        if allowances[from][spender] < value:
+            throw "Insufficient allowances"
+
+        allowances[from][spender] -= value
+
+    transfer!(from, to, value)
+
+endpoint invokable Claim!():
+    var account = Address(Sender)
+    observe nextClaims <- BuyMeATea.State.nextClaims:
+        if nextClaims[account] > Env.Timestamp():
+            throw "Next Claim at {nextClaims[address]}"
+
+    mint!(account, value: CLAIM_AMOUNT)
+
+    mutate nextClaims <- BuyMeATea.State.nextClaims:
+        nextClaims[account] = Env.Timestamp() + CLAIM_INTERVAL
+
+
+
+endpoint invokable CreateCampaign!(teaPrice U64) -> (CreatedCampaign TeaCampaign):
+    if teaPrice <= 0:
+     throw "Invalid Price"
+    
+    var newTeaCampaign = TeaCampaign{owner : Address(Sender), contributors : make(Map[Address]U64) ,teaPrice: teaPrice, totalTeas : 0}
+
+    mutate campaigns <- BuyMeATea.State.campaigns:
+        campaigns = append(campaigns, newTeaCampaign)
+        yield CreatedCampaign newTeaCampaign
+
+
+endpoint invokable BuyTea!(campaignId U64,teaUnits U64):
+    mutate campaigns <- BuyMeATea.State.campaigns:
+        campaigns[campaignId].totalTeas += teaUnits
+        campaigns.contributors[Address(Sender)] = teaUnits
+        transfer!(from : Address(Sender), to : campaigns.owner,value : teaUnits * campaigns.teaPrice )
+    
 
 ////////////////////////
-// Observe Endpoints
+// Observe/Read Endpoints
 ///////////////////////
 
-// Note: No "!" required as suffix for observe endpoints
+endpoint invokable Name()->(name String):
+    observe name <- BuyMeATea.State.name
 
-// Get all donations
-endpoint invokable GetDonations()->(donations []Donation):
-    // Observe donations from the persistent state and yield
-    observe donations <- BuyMeATea.State.donations
+endpoint invokable Symbol()->(symbol String):
+    observe symbol <- BuyMeATea.State.symbol
+
+endpoint invokable Decimals()->(decimals U64):
+    observe decimals <- BuyMeATea.State.decimals
+
+endpoint invokable TotalSupply()->(totalSupply U64):
+    observe totalSupply <- BuyMeATea.State.totalSupply
+
+endpoint invokable ClaimAmount()->(claimAmount U64):
+    yield claimAmount CLAIM_AMOUNT
+
+endpoint invokable ClaimInterval()->(claimInterval I64):
+    yield claimInterval CLAIM_INTERVAL
+
+endpoint invokable NextClaim(account Address)->(nextClaim I64):
+    observe nextClaims <- BuyMeATea.State.nextClaims:
+        yield nextClaim nextClaims[account]
+
+endpoint invokable BalanceOf(account Address)->(balance U64):
+    observe balanceOf <- BuyMeATea.State.balanceOf:
+        yield balance balanceOf[account]
+
+endpoint invokable Allowances(owner Address, spender Address)->(allowance U64):
+    observe allowances <- BuyMeATea.State.allowances:
+        yield allowance allowances[owner][spender]
+
+
+
+
+// endpoint invokable AddDonation!(teaAmount U64, recipient Address, messageString) -> (AddedDoantion Donation):
+//     if amount <= 0:
+//         throw "Invalid Amount"
+    
+//     var newDonation = Donation{}
+
+endpoint invokable SeeCampaign() -> (campaigns []TeaCampaign):
+    observe campaigns <- BuyMeATea.State.campaigns
