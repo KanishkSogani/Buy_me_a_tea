@@ -118,8 +118,8 @@ endpoint invokable CreateCampaign!(teaPrice U64) -> (CreatedCampaign TeaCampaign
 endpoint invokable BuyTea!(campaignId U64,teaUnits U64):
     mutate campaigns <- BuyMeATea.State.campaigns:
         campaigns[campaignId].totalTeas += teaUnits
-        campaigns.contributors[Address(Sender)] = teaUnits
-        transfer!(from : Address(Sender), to : campaigns.owner,value : teaUnits * campaigns.teaPrice )
+        campaigns[campaignId].contributors[Address(Sender)] += teaUnits
+        transfer!(from : Address(Sender), to : campaigns[campaignId].owner ,value : teaUnits * campaigns[campaignId].teaPrice )
     
 
 ////////////////////////
