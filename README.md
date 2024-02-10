@@ -19,5 +19,4 @@ Trust and Transparency: Transactions on blockchain networks are transparent and 
 
 Global Accessibility: Web3 technology enables global participation without the need for intermediaries or traditional banking systems. Users from anywhere in the world can participate in transactions.
 
-### Team Name: Blitz
-### Team Members: Kanishk Sogani, Prakhar Singh.
+
