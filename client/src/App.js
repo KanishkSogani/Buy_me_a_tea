@@ -6,6 +6,7 @@ import { useState } from "react";
 import Faucet from "./pages/Faucet";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Buy from "./components/Buy";
 
 function App() {
   const [wallet, setWallet] = useState();
@@ -36,6 +37,7 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/buy" element={<Buy />} />
         <Route path="/faucet" element={<Faucet wallet={wallet} />} />
       </Routes>
     </div>
