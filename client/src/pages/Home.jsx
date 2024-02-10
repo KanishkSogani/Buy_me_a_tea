@@ -17,7 +17,9 @@ function Home() {
         <div
           style={{
             fontSize: 20,
-            backgroundColor: "black",
+            // backgroundColor: "black",
+            background:
+              "linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)",
             color: "white",
             padding: 10,
             borderRadius: " 10px 0px 0px 10px",
@@ -28,7 +30,15 @@ function Home() {
       </div>
       <div>
         <div style={{ position: "relative", left: 100 }}>
-          <Card style={{ margin: 10, width: 400, minHeight: 200, padding: 20 }}>
+          <Card
+            style={{
+              margin: 10,
+              width: 400,
+              minHeight: 200,
+              padding: 20,
+              backgroundColor: "#FFFEFE",
+            }}
+          >
             <Typography textAlign={"center"} variant="h4">
               Buy a Tea
             </Typography>

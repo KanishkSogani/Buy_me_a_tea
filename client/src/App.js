@@ -21,7 +21,7 @@ function App() {
   return (
     <div
       className="app"
-      style={{ height: "100vh", width: "100vw", backgroundColor: "#FFFEFE" }}
+      style={{ height: "100vh", width: "100vw", backgroundColor: "#FBF9F0" }}
     >
       <Navbar
         updateWallet={updateWallet}
