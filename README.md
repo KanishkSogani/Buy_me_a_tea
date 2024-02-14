@@ -1,4 +1,4 @@
-# Buy Me A Coffee
+# Buy Me A Tea
 
 Current System:  BMC controls user data and transactions, potentially leading to privacy concerns and dependence on their platform. Traditional payment methods may not be accessible to everyone, and fees can be high for both creators and supporters.While BMC provides basic creator earnings reports, some may desire more detailed transaction data.
 
