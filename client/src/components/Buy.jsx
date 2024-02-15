@@ -1,7 +1,9 @@
 import { Card, Typography, TextField, Button } from "@mui/material";
 import { useState } from "react";
+import Lottie from "lottie-react";
+import donateAnimation from "../assets/donateAnimation.json";
 
-function Buy(){
+function Buy() {
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -29,7 +31,13 @@ function Buy(){
           My Balance: {1000}
         </div>
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
         <div style={{ position: "relative", left: 100 }}>
           <Card
             style={{
@@ -90,7 +98,7 @@ function Buy(){
           </Card>
         </div>
         <div>
-          <Card></Card>
+          <Lottie animationData={donateAnimation} />
         </div>
       </div>
     </div>

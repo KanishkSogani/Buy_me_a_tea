@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import teaAnimation from "../assets/teaAnimation.json";
 
-const teaimg = "tea/tea.png";
-
 const Navbar = ({ updateWallet, showConnectModal, wallet }) => {
   const [toggleValue, setToggle] = useState(false);
 
