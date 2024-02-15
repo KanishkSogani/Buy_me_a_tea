@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { truncateStr } from "../utils/truncateStr";
 import { Link } from "react-router-dom";
+import Lottie from "lottie-react";
+import teaAnimation from "../assets/teaAnimation.json";
 
 const teaimg = "tea/tea.png";
 
@@ -40,10 +42,11 @@ const Navbar = ({ updateWallet, showConnectModal, wallet }) => {
           <div></div>
         </div>
         <Link className="navbar__logo" to={"/"}>
-          <img
-            src={teaimg}
-            alt="tea"
-            style={{ height: 50, width: 50, marginBottom: 10, marginRight: 10 }}
+          <Lottie
+            style={{
+              height: 70,
+            }}
+            animationData={teaAnimation}
           />
           <div>Buy Me A Tea</div>
         </Link>

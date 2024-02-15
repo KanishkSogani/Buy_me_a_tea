@@ -1,4 +1,5 @@
-import { Flex } from "antd";
+import Lottie from "lottie-react";
+import arrowAnimation from "../assets/arrowAnimation.json";
 
 function Home() {
   return (
@@ -38,17 +39,26 @@ function Home() {
         </p>
         <p style={{ fontSize: 25, fontWeight: 400 }}>Now in your hands!</p>
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "6%",
+        }}
+      >
         <h2
           style={{
             fontFamily: "Dancing Script",
-            textAlign: "center",
-            marginTop: "6%",
           }}
         >
-          Click Here:
+          Click Here
         </h2>
+        <div>
+          <Lottie style={{ height: 40 }} animationData={arrowAnimation} />
+        </div>
       </div>
+
       <button
         className="button"
         onClick={() => {
