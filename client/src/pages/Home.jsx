@@ -44,7 +44,7 @@ function Home() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: "6%",
+          marginTop: "6.3%",
         }}
       >
         <h2
