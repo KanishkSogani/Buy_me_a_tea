@@ -1,5 +1,7 @@
 import Lottie from "lottie-react";
 import arrowAnimation from "../assets/arrowAnimation.json";
+import creatorAnimation from "../assets/creatorAnimation.json";
+import donateboxAnimation from "../assets/donateboxAnimation.json";
 
 function Home() {
   return (
@@ -67,6 +69,28 @@ function Home() {
       >
         Start Now <i></i>
       </button>
+      <div>
+        <Lottie
+          animationData={creatorAnimation}
+          style={{
+            position: "absolute",
+            height: "50vh",
+            bottom: "1vh",
+            left: "10vh",
+          }}
+        />
+      </div>
+      <div>
+        <Lottie
+          animationData={donateboxAnimation}
+          style={{
+            position: "absolute",
+            height: "50vh",
+            bottom: "2vh",
+            right: "0vh",
+          }}
+        />
+      </div>
       {/* <p
         style={{
           display: "flex",
