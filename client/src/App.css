@@ -549,3 +549,26 @@ i {
     left: 82%;
   }
 }
+
+.inputBox {
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 6px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  transition: box-shadow 100ms ease-in, border 100ms ease-in,
+    background-color 100ms ease-in;
+  border: 2px solid white;
+  color: rgb(14, 14, 16);
+  background: white;
+  display: block;
+  height: 40px;
+  width: 100%;
+}
+.inputBox:hover {
+  border-color: #ccc;
+}
+.inputBox:focus {
+  border-color: #9147ff;
+  background: #fff;
+}

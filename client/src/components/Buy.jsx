@@ -1,4 +1,4 @@
-import { Card, Typography, TextField, Button } from "@mui/material";
+import { Card, Typography, TextField, Button, Input } from "@mui/material";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import donateAnimation from "../assets/donateAnimation.json";
@@ -45,53 +45,60 @@ function Buy() {
               width: 400,
               minHeight: 200,
               padding: 20,
-              backgroundColor: "#FFFEFE",
+              backgroundColor: "#F5F9FF",
             }}
           >
-            <Typography textAlign={"center"} variant="h4">
-              Buy a Tea
-            </Typography>
+            <p
+              style={{
+                fontSize: 30,
+                fontWeight: "bold",
+                marginBottom: 0,
+                fontFamily: "monospace",
+              }}
+            >
+              Buy a tea
+            </p>
             <br />
-            <Typography variant="h6">Name:</Typography>
-            <TextField
+            <input
+              className="inputBox"
               onChange={(e) => {
                 setName(e.target.value);
               }}
-              placeholder="Kanishk Sogani"
+              placeholder="Your Name"
               variant="outlined"
               fullWidth="true"
             />
             <br />
-            <Typography variant="h6">Address:</Typography>
-            <TextField
+            <input
+              className="inputBox"
               onChange={(e) => {
                 setAddress(e.target.value);
               }}
-              placeholder="0x..."
+              placeholder="Creator Address"
               variant="outlined"
               fullWidth="true"
             />
             <br />
-            <Typography variant="h6">Message:</Typography>
-            <TextField
+            <input
+              className="inputBox"
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
-              placeholder="Hello"
+              placeholder="Send a Message"
               variant="outlined"
               fullWidth="true"
             />
             <br />
-            <Typography variant="h6">Tea:</Typography>
-            <TextField
+            <input
+              className="inputBox"
               onChange={(e) => {
                 setAmount(e.target.value * 5);
               }}
-              placeholder="1"
+              placeholder="Tea Amount"
               variant="outlined"
               fullWidth="true"
             />
-            <br /> <br />
+            <br />
             <Button variant="contained" size="medium">
               Support {amount}$
             </Button>
