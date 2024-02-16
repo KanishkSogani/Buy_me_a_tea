@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { VoyageProvider, Wallet, LogicFactory } = require("js-moi-sdk");
-const Manifest = require("./coco/samplelogic.json");
+const Manifest = require("./coco/BuyMeATea.json");
 
 // ------- Update with your Mnemonic ------------------ //
 const MNEMONIC = process.env.MNEMONIC;
@@ -24,16 +24,20 @@ const deployLogic = async () => {
   const wallet = await constructWallet();
 
   // Create logic instance using Logic factory
-  const logic = new LogicFactory(Manifest, wallet);
+  const logic = new LogicFactory(BuyMeATeaManifest, wallet);
 
   // Deploy the logic get ixResponse
   const ixResponse = await logic.deploy("Init!", "JUST", "JS", 2, "1000");
+  console.log("------ Deploying Logic ----------");
+  console.log(ixResponse);
 
   const ixReceipt = await ixResponse.wait();
-
+  console.log("------ Deployed Logic Successfully!! ----------");
   console.log(ixReceipt);
 
   // Get the logic_id from ixReceipt and start making ixn from client app
+  console.log("LOGIC_ID");
+  console.log(ixReceipt.extra_data.logic_id);
 };
 
 deployLogic();
