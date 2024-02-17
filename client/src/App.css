@@ -366,11 +366,11 @@ header {
 
 .donate {
   position: relative;
-  right: 10%;
+  right: 10vw;
 }
 .creator {
   position: relative;
-  left: 6%;
+  left: 5.5vw;
 }
 
 i {

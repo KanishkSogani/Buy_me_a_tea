@@ -114,8 +114,9 @@ function Home() {
           animationData={creatorAnimation}
           style={{
             position: "absolute",
-            height: "50vh",
-            bottom: "1vh",
+            // height: "50vh",
+            width: "20vw",
+            bottom: "2vh",
             left: "10vh",
           }}
         />
@@ -125,8 +126,9 @@ function Home() {
           animationData={donateboxAnimation}
           style={{
             position: "absolute",
-            height: "50vh",
-            bottom: "2vh",
+            // height: "50vh",
+            width: "35vw",
+            bottom: "5vh",
             right: "0vh",
           }}
         />
