@@ -24,7 +24,7 @@ const deployLogic = async () => {
   const wallet = await constructWallet();
 
   // Create logic instance using Logic factory
-  const logic = new LogicFactory(BuyMeATeaManifest, wallet);
+  const logic = new LogicFactory(Manifest, wallet);
 
   // Deploy the logic get ixResponse
   const ixResponse = await logic.deploy("Init!", "JUST", "JS", 2, "1000");

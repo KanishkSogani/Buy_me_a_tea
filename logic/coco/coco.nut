@@ -14,7 +14,7 @@ arch = "PISA"
 
 [target.moi]
 format = "JSON"
-output = "buymeateaplatform"
+output = "BuyMeATea"
 
 [target.pisa]
 format = "BIN"
