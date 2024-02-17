@@ -66,3 +66,5 @@ const logic = {
 };
 
 export default logic;
+
+//User wallet is not required for read calls

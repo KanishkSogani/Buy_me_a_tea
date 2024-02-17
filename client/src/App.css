@@ -333,10 +333,10 @@ header {
   padding: 25px;
 
   /*  centering */
-  position: absolute;
+  /* position: absolute;
   text-align: center;
   left: 50%;
-  top: 80vh;
+  top: 80vh; */
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -348,6 +348,29 @@ header {
   &:hover {
     background: rgba(8, 97, 76, 0.6);
   }
+}
+
+.creatorbut {
+  position: absolute;
+  text-align: center;
+  left: 35%;
+  top: 80vh;
+}
+
+.donatebut {
+  position: absolute;
+  text-align: center;
+  left: 60%;
+  top: 80vh;
+}
+
+.donate {
+  position: relative;
+  right: 10%;
+}
+.creator {
+  position: relative;
+  left: 6%;
 }
 
 i {

@@ -49,26 +49,66 @@ function Home() {
           marginTop: "13.5vh",
         }}
       >
-        <h2
+        <div
+          className="donate"
           style={{
-            fontFamily: "Dancing Script",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            // marginTop: "13.5vh",
           }}
         >
-          Click Here
-        </h2>
-        <div>
-          <Lottie style={{ height: 40 }} animationData={arrowAnimation} />
+          <h2
+            style={{
+              fontFamily: "Dancing Script",
+            }}
+          >
+            Click Here
+          </h2>
+          <div>
+            <Lottie style={{ height: 40 }} animationData={arrowAnimation} />
+          </div>
+        </div>
+        <div
+          className="creator"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            // marginTop: "13.5vh",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "Dancing Script",
+            }}
+          >
+            Click Here
+          </h2>
+          <div>
+            <Lottie style={{ height: 40 }} animationData={arrowAnimation} />
+          </div>
         </div>
       </div>
 
       <button
-        className="button"
+        className="button donatebut"
         onClick={() => {
           window.location = "/buy";
         }}
       >
-        Start Now <i></i>
+        Donate Now <i></i>
       </button>
+
+      <button
+        className="button creatorbut"
+        onClick={() => {
+          window.location = "/buy";
+        }}
+      >
+        Create Page <i></i>
+      </button>
+
       <div>
         <Lottie
           animationData={creatorAnimation}
