@@ -26,18 +26,17 @@ const ClaimToken = async (wallet) => {
   return ixResponse.wait();
 };
 
-const CreateCampaign = async (wallet, teaPrice = 5)=> {
+const CreateCampaign = async (wallet, teaPrice = 5) => {
   const logicDriver = await getLogicDriver(logicId, wallet);
   const ixResponse = await logicDriver.routines.CreateCampaign(teaPrice);
   return ixResponse.wait();
-}
+};
 
-
-const BuyTea = async(wallet, id, amount) => {
+const BuyTea = async (wallet, id, amount) => {
   const logicDriver = await getLogicDriver(logicId, wallet);
   const ixResponse = await logicDriver.routines.BuyTea(id, amount);
   return ixResponse.wait();
-}
+};
 
 ////////////////////////
 // Observe/Read Calls

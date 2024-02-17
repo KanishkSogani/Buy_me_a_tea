@@ -2,12 +2,20 @@ import { Card, Typography, TextField, Button, Input } from "@mui/material";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import donateAnimation from "../assets/donateAnimation.json";
+import logic from "../interface/logic";
 
-function Buy() {
+function Buy({ wallet }) {
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(0);
   const [message, setMessage] = useState("");
+
+  const buytheTea = async (e) => {
+    e.preventDefault();
+    try{
+      
+    }
+  };
 
   return (
     <div className="basic" style={{ paddingRight: 0 }}>
@@ -92,14 +100,20 @@ function Buy() {
             <input
               className="inputBox"
               onChange={(e) => {
-                setAmount(e.target.value * 5);
+                setAmount(e.target.value);
               }}
               placeholder="Tea Amount"
               variant="outlined"
               fullWidth="true"
             />
             <br />
-            <Button variant="contained" size="medium">
+            <Button
+              variant="contained"
+              size="medium"
+              onClick={async () => {
+                await logic.BuyTea(wallet, address, amount);
+              }}
+            >
               Support {amount}$
             </Button>
           </Card>

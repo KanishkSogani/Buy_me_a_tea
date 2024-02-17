@@ -38,7 +38,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/buy" element={<Buy />} />
+        <Route path="/buy" element={<Buy wallet={wallet} />} />
         <Route path="/faucet" element={<Faucet wallet={wallet} />} />
       </Routes>
     </div>
