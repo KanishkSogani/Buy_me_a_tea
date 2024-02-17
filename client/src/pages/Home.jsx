@@ -43,10 +43,11 @@ function Home() {
       </div>
       <div
         style={{
+          position: "relative",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: "13.5vh",
+          top: "11.5vh",
         }}
       >
         <div
