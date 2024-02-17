@@ -111,7 +111,7 @@ endpoint invokable CreateCampaign!(teaPrice U64) -> (CreatedCampaign TeaCampaign
     var newTeaCampaign = TeaCampaign{owner : Address(Sender), contributors : make(Map[Address]U64) ,teaPrice: teaPrice, totalTeas : 0}
 
     mutate campaigns <- BuyMeATea.State.campaigns:
-        newTeaCampaign.campaignId = lens(campaigns)
+        newTeaCampaign.campaignId = len(campaigns)
         campaigns = append(campaigns, newTeaCampaign)
         yield CreatedCampaign newTeaCampaign
 
