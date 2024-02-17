@@ -68,7 +68,7 @@ const GetTokenSymbol = async () => {
 };
 const GetCampaigns = async () => {
   const logicDriver = await getLogicDriver(logicId, baseWallet);
-  return logicDriver.routines.GetCampaigns();
+  return logicDriver.routines.SeeCampaigns();
 };
 
 const logic = {
