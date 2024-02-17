@@ -26,6 +26,19 @@ const ClaimToken = async (wallet) => {
   return ixResponse.wait();
 };
 
+const CreateCampaign = async (wallet)=> {
+  const logicDriver = await getLogicDriver(logicId, wallet);
+  const ixResponse = await logicDriver.routines.CreateCampaign();
+  return ixResponse.wait();
+}
+
+
+const BuyTea = async(wallet, amount) => {
+  const logicDriver = await getLogicDriver(logicId, wallet);
+  const ixResponse = await logicDriver.routines.BuyTea(amount);
+  return ixResponse.wait();
+}
+
 ////////////////////////
 // Observe/Read Calls
 ///////////////////////
@@ -54,6 +67,10 @@ const GetTokenSymbol = async () => {
   const logicDriver = await getLogicDriver(logicId, baseWallet);
   return logicDriver.routines.Symbol();
 };
+const GetCampaigns = async () => {
+  const logicDriver = await getLogicDriver(logicId, baseWallet);
+  return logicDriver.routines.GetCampaigns();
+};
 
 const logic = {
   GetTokenName,
@@ -63,6 +80,9 @@ const logic = {
   GetTokenDecimals,
   GetTokenSymbol,
   ClaimToken,
+  CreateCampaign,
+  BuyTea,
+  GetCampaigns,
 };
 
 export default logic;
