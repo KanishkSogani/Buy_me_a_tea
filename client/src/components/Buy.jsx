@@ -5,15 +5,23 @@ import donateAnimation from "../assets/donateAnimation.json";
 import logic from "../interface/logic";
 
 function Buy({ wallet }) {
+  const [money, setMoney] = useState(100);
+  const [tea, setTea] = useState(1);
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
-  const [address, setAddress] = useState(0);
+  const [address, setAddress] = useState();
   const [message, setMessage] = useState("");
 
-  const buytheTea = async (e) => {
-    e.preventDefault();
-    try{
-      
+  const buytheTea = async () => {
+    try {
+      await logic.BuyTea(wallet, address, tea);
+      alert("Successfully Donated Amount");
+      setName("");
+      setTea(1);
+      setMessage("");
+      setAddress();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -36,7 +44,7 @@ function Buy({ wallet }) {
             borderRadius: " 10px 0px 0px 10px",
           }}
         >
-          My Balance: {1000}
+          {`My Balance: ${money}$`}
         </div>
       </div>
       <div
@@ -72,6 +80,7 @@ function Buy({ wallet }) {
               onChange={(e) => {
                 setName(e.target.value);
               }}
+              value={name}
               placeholder="Your Name"
               variant="outlined"
               fullWidth="true"
@@ -82,6 +91,7 @@ function Buy({ wallet }) {
               onChange={(e) => {
                 setAddress(e.target.value);
               }}
+              value={address}
               placeholder="Creator Address"
               variant="outlined"
               fullWidth="true"
@@ -92,6 +102,7 @@ function Buy({ wallet }) {
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
+              value={message}
               placeholder="Send a Message"
               variant="outlined"
               fullWidth="true"
@@ -100,20 +111,17 @@ function Buy({ wallet }) {
             <input
               className="inputBox"
               onChange={(e) => {
-                setAmount(e.target.value);
+                setAmount(e.target.value * 5);
+                setTea(e.target.value);
+                setMoney((money) => money - e.target.value * 5);
               }}
+              value={tea}
               placeholder="Tea Amount"
               variant="outlined"
               fullWidth="true"
             />
             <br />
-            <Button
-              variant="contained"
-              size="medium"
-              onClick={async () => {
-                await logic.BuyTea(wallet, address, amount);
-              }}
-            >
+            <Button variant="contained" size="medium" onClick={buytheTea}>
               Support {amount}$
             </Button>
           </Card>
