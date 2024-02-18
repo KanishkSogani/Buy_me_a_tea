@@ -1,4 +1,4 @@
-import { Card, Typography, TextField, Button, Input } from "@mui/material";
+import { Card, Button } from "@mui/material";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import donateAnimation from "../assets/donateAnimation.json";
@@ -19,7 +19,7 @@ function Buy({ wallet }) {
       setName("");
       setTea(1);
       setMessage("");
-      setAddress();
+      setAddress("");
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +92,7 @@ function Buy({ wallet }) {
                 setAddress(e.target.value);
               }}
               value={address}
-              placeholder="Creator Address"
+              placeholder="Creator ID"
               variant="outlined"
               fullWidth="true"
             />
