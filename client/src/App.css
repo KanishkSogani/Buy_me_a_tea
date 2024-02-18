@@ -114,6 +114,11 @@ button {
   font-family: var(--font-satoshi-regular);
 }
 
+button[disabled] {
+  opacity: 0.5; /* Example: Reduce opacity */
+  cursor: not-allowed; /* Example: Change cursor to not-allowed */
+}
+
 .btn {
   padding: 10px 15px;
   font-size: 16px;
@@ -123,6 +128,10 @@ button {
   font-family: var(--font-satoshi-regular);
   transition: background-color 0.3s ease;
   height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
 }
 
 .btn--blue {

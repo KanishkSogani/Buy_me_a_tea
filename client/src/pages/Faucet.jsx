@@ -1,68 +1,69 @@
-import { Button, Card, Skeleton } from "antd";
-import React, { useEffect, useState } from "react";
-import logic from "../interface/logic";
-import { toastError } from "../utils/toastWrapper";
+import { Card, Skeleton, message } from "antd";
+import { getLogicDriver } from "js-moi-sdk";
+import React, { useEffect, useRef, useState } from "react";
+import logic, { logicId } from "../interface/logic";
+import { toastError, toastSuccess } from "../utils/toastWrapper";
+import Loader from "../components/Loader";
+import { calculateRemainingTime } from "../utils/CalculateTimer";
 
-const Faucet = ({ wallet }) => {
+// Changes Made
+
+const Faucet = ({
+  wallet,
+  showConnectModal,
+  updateTokenBalance,
+  tokenDetails,
+  tokenBalance,
+}) => {
   const [isLoading, setLoading] = useState(false);
   const [isClaiming, setClaiming] = useState(false);
   const [refillTime, setRefillTime] = useState("00:00:00");
   const [error, setError] = useState("");
-  const [tokenName, setTokenName] = useState("");
   const [claimAmount, setClaimAmount] = useState();
   const [nextClaim, setNextClaim] = useState();
-  const [symbol, setSymbol] = useState();
-  const [decimals, setDecimals] = useState();
 
   useEffect(() => {
-    getTokenDetails();
-    getClaimDetails();
-  }, []);
+    if (!wallet) return;
 
-  const getTokenDetails = async () => {
-    const { name } = await logic.GetTokenName();
-    const { symbol } = await logic.GetTokenSymbol();
-    const { decimals } = await logic.GetTokenDecimals();
-    const { userBalance } = await logic.GetTokenBalanceOf();
+    const initDetails = async () => {
+      setLoading(true);
 
-    setSymbol(symbol);
-    setDecimals(decimals);
-    setTokenName(name);
-  };
+      const [{ claimAmount }, { nextClaim }] = await Promise.all([
+        logic.GetTokenClaimAmount(wallet.getAddress()),
+        logic.GetNextClaim(wallet.getAddress()),
+      ]);
 
-  const getClaimDetails = async () => {
-    if (!wallet) return toastError("Please connect wallet");
-    const { claimAmount } = await logic.GetTokenClaimAmount(
-      wallet.getAddress()
-    );
-    const { nextClaim } = await logic.GetNextClaim(wallet.getAddress());
+      setClaimAmount(claimAmount);
+      setNextClaim(nextClaim);
+      setLoading(false);
+    };
 
-    setClaimAmount(claimAmount);
-    setNextClaim(nextClaim);
-  };
+    initDetails();
+  }, [wallet]);
 
-  const calculateRemainingTime = () => {
-    // Get the current date and time in UTC
-    const now = new Date();
+  useEffect(() => {
+    const id = setInterval(() => {
+      setRefillTime(calculateRemainingTime(nextClaim));
+    }, 1000);
 
-    // Create a new Date object for 12:00 AM UTC
-    const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-    tomorrow.setUTCHours(0, 0, 0, 0);
+    return () => clearInterval(id);
+  }, [nextClaim]);
 
-    // Calculate the difference between now and 12:00 AM UTC
-    const diff = tomorrow.getTime() - now.getTime();
+  const onClaimHandler = async () => {
+    try {
+      setClaiming(true);
 
-    // Convert the difference to hours, minutes, and seconds
-    const hours = Math.floor(diff / (60 * 60 * 1000));
-    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
+      await logic.ClaimToken(wallet);
+      const { nextClaim } = await logic.GetNextClaim(wallet.getAddress());
 
-    // Format the remaining time as a string in the "23:00:00" format
-    const remainingTime = `${String(hours).padStart(2, "0")}:${String(
-      minutes
-    ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-    return remainingTime;
+      setNextClaim(nextClaim);
+      updateTokenBalance(tokenBalance + claimAmount);
+      toastSuccess(`Claimed ${claimAmount} successfully`);
+      setClaiming(false);
+    } catch (error) {
+      toastError(error.message);
+      setClaiming(false);
+    }
   };
 
   return wallet ? (
@@ -77,14 +78,22 @@ const Faucet = ({ wallet }) => {
                 <div className="">
                   <div className="">Available Limit</div>
                   <h1>
-                    {claimAmount} {tokenName}
+                    {refillTime === "00:00:00" ? claimAmount : 0}{" "}
+                    {tokenDetails.name}
                   </h1>
                 </div>
               </div>
               <div className="">
                 {" "}
                 {error && <p className="">{error}</p>}
-                <button className="btn btn--blue">Claim Tokens</button>
+                <button
+                  disabled={refillTime !== "00:00:00"}
+                  className="btn btn--blue"
+                  onClick={onClaimHandler}
+                >
+                  <span>Claim Tokens</span>
+                  <Loader loading={isClaiming} size={25} color="#fff" />
+                </button>
                 {isClaiming && (
                   <p className="">
                     Please wait while the current request is being processed
@@ -100,7 +109,22 @@ const Faucet = ({ wallet }) => {
       </Card>
     </div>
   ) : (
-    <h2>Please Connect Wallet </h2>
+    <div className="connect-wallet">
+      <div className="center">
+        <p>Please connect your wallet to continue</p>
+
+        <div>
+          <button
+            className="btn btn--blue"
+            onClick={() => {
+              showConnectModal(true);
+            }}
+          >
+            Connect Wallet
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
