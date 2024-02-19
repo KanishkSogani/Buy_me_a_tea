@@ -2,8 +2,17 @@ import Lottie from "lottie-react";
 import arrowAnimation from "../assets/arrowAnimation.json";
 import creatorAnimation from "../assets/creatorAnimation.json";
 import donateboxAnimation from "../assets/donateboxAnimation.json";
+import logic from "../interface/logic";
 
-function Home() {
+function Home({ wallet }) {
+  // const getcamp = async () => {
+  //   try {
+  //     const { campaigns } = await logic.GetCampaigns();
+  //     console.log(campaigns);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <>
       <div
@@ -104,7 +113,7 @@ function Home() {
       <button
         className="button creatorbut"
         onClick={() => {
-          window.location = "/buy";
+          window.location = "/admin";
         }}
       >
         Create Page <i></i>

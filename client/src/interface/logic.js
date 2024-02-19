@@ -26,7 +26,7 @@ const ClaimToken = async (wallet) => {
   return ixResponse.wait();
 };
 
-const CreateCampaign = async (wallet, teaPrice = 5) => {
+const CreateCampaign = async (wallet, teaPrice) => {
   const logicDriver = await getLogicDriver(logicId, wallet);
   const ixResponse = await logicDriver.routines.CreateCampaign(teaPrice);
   return ixResponse.result();

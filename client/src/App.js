@@ -8,12 +8,18 @@ import Faucet from "./pages/Faucet";
 import Home from "./pages/Home";
 import logic from "./interface/logic";
 import Buy from "./components/Buy";
+import Admin from "./components/Admin";
 
 function App() {
   const [wallet, setWallet] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tokenDetails, setTokenDetails] = useState({});
   const [tokenBalance, setTokenBalance] = useState();
+  const [teas, setTeas] = useState("");
+
+  const Setteas = (e) => {
+    setTeas(e);
+  };
 
   useEffect(() => {
     const getTokenDetails = async () => {
@@ -71,8 +77,8 @@ function App() {
         updateWallet={updateWallet}
       />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home wallet={wallet} />} />
+        <Route path="/home" element={<Home wallet={wallet} />} />
         <Route
           path="/faucet"
           element={
@@ -86,6 +92,10 @@ function App() {
           }
         />
         <Route path="/buy" element={<Buy wallet={wallet} />} />
+        <Route
+          path="/admin"
+          element={<Admin wallet={wallet} teas={teas} Setteas={Setteas} />}
+        />
       </Routes>
     </div>
   );
