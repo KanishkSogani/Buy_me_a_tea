@@ -21,7 +21,7 @@ function Buy({ wallet, tokenBalance }) {
       setMessage("");
       setAddress("");
     } catch (error) {
-      toastError(error);
+      toastError(`Please Connect Wallet`);
     }
   };
 
@@ -113,7 +113,6 @@ function Buy({ wallet, tokenBalance }) {
               onChange={(e) => {
                 setAmount(e.target.value * 5);
                 setTea(e.target.value);
-                // setMoney((money) => money - e.target.value * 5);
               }}
               value={tea}
               placeholder="Tea Amount"

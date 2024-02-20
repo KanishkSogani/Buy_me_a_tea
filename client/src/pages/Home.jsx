@@ -2,17 +2,10 @@ import Lottie from "lottie-react";
 import arrowAnimation from "../assets/arrowAnimation.json";
 import creatorAnimation from "../assets/creatorAnimation.json";
 import donateboxAnimation from "../assets/donateboxAnimation.json";
-import logic from "../interface/logic";
+import { useNavigate } from "react-router-dom";
 
-function Home({ wallet }) {
-  // const getcamp = async () => {
-  //   try {
-  //     const { campaigns } = await logic.GetCampaigns();
-  //     console.log(campaigns);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+function Home() {
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -104,7 +97,7 @@ function Home({ wallet }) {
       <button
         className="button donatebut"
         onClick={() => {
-          window.location = "/buy";
+          navigate("/buy");
         }}
       >
         Donate Now <i></i>
@@ -113,7 +106,7 @@ function Home({ wallet }) {
       <button
         className="button creatorbut"
         onClick={() => {
-          window.location = "/admin";
+          navigate("/admin");
         }}
       >
         Create Page <i></i>

@@ -15,7 +15,7 @@ function Admin({ wallet, teas, Setteas }) {
       const campid = CreatedCampaign.campaignId;
       toastSuccess(`Your Campaign ID is ${campid}`);
     } catch (error) {
-      toastError(error);
+      toastError(`Please Connect Wallet`);
     }
   };
 
@@ -23,17 +23,13 @@ function Admin({ wallet, teas, Setteas }) {
     try {
       const { campaigns } = await logic.GetCampaigns();
       setcamps(campaigns);
+      console.log(id);
+      Setteas(camps[id].totalTeas);
+      toastSuccess(`Total amount of Tea recieved is ${teas}`);
     } catch (error) {
-      toastError(error);
+      toastError(`Please Enter Amount`);
     }
   };
-
-  useEffect(() => {
-    if (camps.length > 0) {
-      Setteas(camps[id].totalTeas);
-      console.log(teas);
-    }
-  }, [camps, id]);
 
   return (
     <>
