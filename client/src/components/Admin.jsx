@@ -9,13 +9,13 @@ function Admin({ wallet, teas, Setteas }) {
   const [id, setId] = useState("");
   const [camps, setcamps] = useState([{}]);
 
-  useEffect(() => {
-    const initdata = async () => {
-      const { campaigns } = await logic.GetCampaigns();
-      setcamps(campaigns);
-    };
-    initdata();
-  }, []);
+  // useEffect(() => {
+  //   const initdata = async () => {
+  //     const { campaigns } = await logic.GetCampaigns();
+  //     setcamps(campaigns);
+  //   };
+  //   initdata();
+  // }, []);
 
   const createcamp = async () => {
     try {
@@ -31,13 +31,17 @@ function Admin({ wallet, teas, Setteas }) {
     try {
       const { campaigns } = await logic.GetCampaigns();
       setcamps(campaigns);
-      console.log(id);
-      Setteas(camps[id].totalTeas);
-      toastSuccess(`Total amount of Tea recieved is ${teas}`);
+      // toastSuccess(`Total amount of Tea recieved is ${camps[id].totalTeas}`);
     } catch (error) {
       toastError(`Please Enter Amount`);
     }
   };
+
+  useEffect(() => {
+    if (camps && camps[id]) {
+      toastSuccess(`Total amount of Tea received is ${camps[id].totalTeas}`);
+    }
+  }, [camps]);
 
   return (
     <>
