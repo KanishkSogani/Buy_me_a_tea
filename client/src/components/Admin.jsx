@@ -7,7 +7,15 @@ import { toastError, toastSuccess } from "../utils/toastWrapper";
 
 function Admin({ wallet, teas, Setteas }) {
   const [id, setId] = useState("");
-  const [camps, setcamps] = useState([]);
+  const [camps, setcamps] = useState([{}]);
+
+  useEffect(() => {
+    const initdata = async () => {
+      const { campaigns } = await logic.GetCampaigns();
+      setcamps(campaigns);
+    };
+    initdata();
+  }, []);
 
   const createcamp = async () => {
     try {

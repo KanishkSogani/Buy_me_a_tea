@@ -5,6 +5,7 @@ import logic, { logicId } from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
 import Loader from "../components/Loader";
 import { calculateRemainingTime } from "../utils/CalculateTimer";
+import login from "../assets/login.jpg";
 
 // Changes Made
 
@@ -107,11 +108,22 @@ const Faucet = ({
     </div>
   ) : (
     <div className="connect-wallet">
-      <div className="center">
-        <p>Please connect your wallet to continue</p>
+      <div
+        className="center"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ height: 400 }}>
+          <img src={login} alt="" />
+        </div>
+        <h4>Please connect your wallet to continue</h4>
 
         <div>
           <button
+            style={{ marginTop: "2vh" }}
             className="btn btn--blue"
             onClick={() => {
               showConnectModal(true);
