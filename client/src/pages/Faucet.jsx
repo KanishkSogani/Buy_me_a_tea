@@ -77,10 +77,7 @@ const Faucet = ({
                 <div className=""></div>
                 <div className="">
                   <div className="">Available Limit</div>
-                  <h1>
-                    {refillTime === "00:00:00" ? claimAmount : 0}{" "}
-                    {tokenDetails.name}
-                  </h1>
+                  <h1>{refillTime === "00:00:00" ? claimAmount : 0} $</h1>
                 </div>
               </div>
               <div className="">

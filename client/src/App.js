@@ -91,7 +91,10 @@ function App() {
             />
           }
         />
-        <Route path="/buy" element={<Buy wallet={wallet} />} />
+        <Route
+          path="/buy"
+          element={<Buy wallet={wallet} tokenBalance={tokenBalance} />}
+        />
         <Route
           path="/admin"
           element={<Admin wallet={wallet} teas={teas} Setteas={Setteas} />}

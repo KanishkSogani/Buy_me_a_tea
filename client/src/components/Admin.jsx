@@ -1,20 +1,21 @@
 import Lottie from "lottie-react";
 import loginAnimation from "../assets/loginAnimation.json";
 import createcampAnimation from "../assets/createcampAnimation.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logic from "../interface/logic";
+import { toastError, toastSuccess } from "../utils/toastWrapper";
 
 function Admin({ wallet, teas, Setteas }) {
   const [id, setId] = useState("");
-  const [camps, setcamps] = useState({});
+  const [camps, setcamps] = useState([]);
 
   const createcamp = async () => {
     try {
       const { CreatedCampaign } = await logic.CreateCampaign(wallet, 5);
       const campid = CreatedCampaign.campaignId;
-      alert(`Your Campaign ID is ${campid}`);
+      toastSuccess(`Your Campaign ID is ${campid}`);
     } catch (error) {
-      console.log(error);
+      toastError(error);
     }
   };
 
@@ -22,13 +23,17 @@ function Admin({ wallet, teas, Setteas }) {
     try {
       const { campaigns } = await logic.GetCampaigns();
       setcamps(campaigns);
-      console.log(id);
-      Setteas(camps[id].totalTeas);
-      console.log(teas);
     } catch (error) {
-      console.log(error);
+      toastError(error);
     }
   };
+
+  useEffect(() => {
+    if (camps.length > 0) {
+      Setteas(camps[id].totalTeas);
+      console.log(teas);
+    }
+  }, [camps, id]);
 
   return (
     <>

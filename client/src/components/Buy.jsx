@@ -3,9 +3,9 @@ import { useState } from "react";
 import Lottie from "lottie-react";
 import donateAnimation from "../assets/donateAnimation.json";
 import logic from "../interface/logic";
+import { toastError, toastSuccess } from "../utils/toastWrapper";
 
-function Buy({ wallet }) {
-  const [money, setMoney] = useState(100);
+function Buy({ wallet, tokenBalance }) {
   const [tea, setTea] = useState(1);
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
@@ -15,13 +15,13 @@ function Buy({ wallet }) {
   const buytheTea = async () => {
     try {
       await logic.BuyTea(wallet, address, tea);
-      alert("Successfully Donated Amount");
+      toastSuccess(`Successfully Donated ${tea} Teas`);
       setName("");
       setTea(1);
       setMessage("");
       setAddress("");
     } catch (error) {
-      console.log(error);
+      toastError(error);
     }
   };
 
@@ -44,7 +44,7 @@ function Buy({ wallet }) {
             borderRadius: " 10px 0px 0px 10px",
           }}
         >
-          {`My Balance: ${money}$`}
+          {tokenBalance > 0 ? `My Balance: ${tokenBalance}$` : `My Balance: `}
         </div>
       </div>
       <div
@@ -113,7 +113,7 @@ function Buy({ wallet }) {
               onChange={(e) => {
                 setAmount(e.target.value * 5);
                 setTea(e.target.value);
-                setMoney((money) => money - e.target.value * 5);
+                // setMoney((money) => money - e.target.value * 5);
               }}
               value={tea}
               placeholder="Tea Amount"

@@ -70,11 +70,7 @@ const Navbar = ({
         >
           Built on MOI
         </a>
-        {wallet && (
-          <button className="btn">
-            {tokenBalance} {tokenDetails.symbol}
-          </button>
-        )}
+        {wallet && <button className="btn">{tokenBalance} $</button>}
         <button
           className="connect-button"
           onClick={wallet ? () => updateWallet() : () => showConnectModal(true)}
