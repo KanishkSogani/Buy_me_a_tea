@@ -19,8 +19,8 @@ class TeaCampaign:
     field teaPrice U64
     field totalTeas U64
 
-const CLAIM_AMOUNT U64 = 10000
-const CLAIM_INTERVAL I64 = 3600  // every 1 hour
+const CLAIM_AMOUNT U64 = 100
+const CLAIM_INTERVAL I64 = 600  // every 1 hour
 
 endpoint deployer Init!(name String,symbol String, decimals U64,totalSupply U64):
     mutate name -> BuyMeATea.State.name
