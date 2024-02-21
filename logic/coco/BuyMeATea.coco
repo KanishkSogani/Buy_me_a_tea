@@ -15,7 +15,7 @@ state persistent:
 class TeaCampaign:
     field campaignId U64
     field owner Address
-    field contributors Map[Address]U64   //Contributors Address => Amount
+    field contributors Map[String]U64   //Contributors Name => Amount
     field teaPrice U64
     field totalTeas U64
 
@@ -108,7 +108,7 @@ endpoint invokable CreateCampaign!(teaPrice U64) -> (CreatedCampaign TeaCampaign
     if teaPrice <= 0:
      throw "Invalid Price"
     
-    var newTeaCampaign = TeaCampaign{owner : Address(Sender), contributors : make(Map[Address]U64) ,teaPrice: teaPrice, totalTeas : 0}
+    var newTeaCampaign = TeaCampaign{owner : Address(Sender), contributors : make(Map[String]U64) ,teaPrice: teaPrice, totalTeas : 0}
 
     mutate campaigns <- BuyMeATea.State.campaigns:
         newTeaCampaign.campaignId = len(campaigns)
@@ -116,10 +116,10 @@ endpoint invokable CreateCampaign!(teaPrice U64) -> (CreatedCampaign TeaCampaign
         yield CreatedCampaign newTeaCampaign
 
 
-endpoint invokable BuyTea!(campaignId U64,teaUnits U64):
+endpoint invokable BuyTea!(campaignId U64,teaUnits U64, name String):
     mutate campaigns <- BuyMeATea.State.campaigns:
         campaigns[campaignId].totalTeas += teaUnits
-        campaigns[campaignId].contributors[Address(Sender)] += teaUnits 
+        campaigns[campaignId].contributors[name] += teaUnits 
         transfer!(from : Address(Sender), to : campaigns[campaignId].owner ,value : teaUnits * campaigns[campaignId].teaPrice )
     
 
