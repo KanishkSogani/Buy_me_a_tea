@@ -82,7 +82,7 @@ function Admin({ wallet }) {
                 marginTop: "20vh",
               }}
             >
-              {id > 0 ? (
+              {id >= 0 ? (
                 `Your Campaign ID is ${id}`
               ) : (
                 <Lottie
