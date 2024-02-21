@@ -4,6 +4,7 @@ import createcampAnimation from "../assets/createcampAnimation.json";
 import { useEffect, useState } from "react";
 import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
+import loadingAnimation from "../assets/loadingAnimation.json";
 
 function Admin({ wallet }) {
   const [id, setId] = useState("");
@@ -79,7 +80,16 @@ function Admin({ wallet }) {
                 marginTop: "20vh",
               }}
             >
-              {id > 0 ? `Your Campaign ID is ${id}` : ``}
+              {id > 0 ? (
+                `Your Campaign ID is ${id}`
+              ) : (
+                <Lottie
+                  animationData={loadingAnimation}
+                  style={{
+                    height: 100,
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
