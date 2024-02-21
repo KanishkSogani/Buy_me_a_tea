@@ -31,6 +31,7 @@ body {
   overflow-x: hidden;
   position: relative;
   font-family: var(--font-satoshi-regular);
+  background-color: #fbf9f0;
 }
 
 * {
@@ -674,4 +675,9 @@ i {
 .inputBox2:focus {
   border-color: #9147ff;
   background: #fff;
+}
+
+.para {
+  font-size: 40;
+  font-family: monospace;
 }

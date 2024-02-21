@@ -7,7 +7,6 @@ import { toastError, toastSuccess } from "../utils/toastWrapper";
 
 function Admin({ wallet }) {
   const [id, setId] = useState("");
-  // const [camps, setcamps] = useState([{}]);
   const [teas, setTeas] = useState("");
 
   // useEffect(() => {
