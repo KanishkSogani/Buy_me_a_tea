@@ -9,6 +9,7 @@ import loadingAnimation from "../assets/loadingAnimation.json";
 function Admin({ wallet }) {
   const [id, setId] = useState();
   const [teas, setTeas] = useState("");
+  const [isClaiming, setClaiming] = useState(false);
 
   // useEffect(() => {
   //   const initdata = async () => {
@@ -20,13 +21,16 @@ function Admin({ wallet }) {
 
   const createcamp = async () => {
     try {
+      setClaiming(true);
       const { CreatedCampaign } = await logic.CreateCampaign(wallet, teas);
       const campid = CreatedCampaign.campaignId;
       setId(campid);
       toastSuccess(`Your Campaign ID is Generated`);
-      setTeas();
+      setTeas("");
+      setClaiming(false);
     } catch (error) {
-      toastError(`Please Connect Wallet`);
+      toastError(`Error Occured`);
+      setClaiming(false);
     }
   };
 
@@ -59,17 +63,18 @@ function Admin({ wallet }) {
             <input
               style={{ position: "relative", top: "2vh" }}
               className="inputBox2"
+              value={teas}
               onChange={(e) => {
                 setTeas(e.target.value);
               }}
               placeholder="Enter Your Tea Price"
               fullWidth="true"
-              value={teas}
             />
             <button
               className="button-30"
               style={{ position: "relative", top: "3vh" }}
               onClick={createcamp}
+              disabled={isClaiming}
             >
               Create ID
             </button>
@@ -84,13 +89,15 @@ function Admin({ wallet }) {
             >
               {id >= 0 ? (
                 `Your Campaign ID is ${id}`
-              ) : (
+              ) : isClaiming ? (
                 <Lottie
                   animationData={loadingAnimation}
                   style={{
                     height: 100,
                   }}
                 />
+              ) : (
+                ``
               )}
             </div>
           </div>

@@ -5,6 +5,7 @@ import donateAnimation from "../assets/donateAnimation.json";
 import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
 import { useParams } from "react-router-dom";
+import loadingAnimation from "../assets/loadingAnimation.json";
 
 function Buy({ wallet, tokenBalance }) {
   const { campId } = useParams();
@@ -12,16 +13,20 @@ function Buy({ wallet, tokenBalance }) {
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [isClaiming, setClaiming] = useState(false);
 
   const buytheTea = async () => {
     try {
-      await logic.BuyTea(wallet, campId, tea);
+      setClaiming(true);
+      await logic.BuyTea(wallet, campId, tea, name);
       toastSuccess(`Successfully Donated ${tea} Teas`);
       setName("");
       setTea(1);
       setMessage("");
+      setClaiming(false);
     } catch (error) {
       toastError(`Error Occurred `);
+      setClaiming(false);
     }
   };
 
@@ -120,9 +125,23 @@ function Buy({ wallet, tokenBalance }) {
               fullWidth="true"
             />
             <br />
-            <Button variant="contained" size="medium" onClick={buytheTea}>
-              Support {tea > 0 ? `${tea} tea` : ` `}
-            </Button>
+            <button
+              className="btn btn--blue"
+              variant="contained"
+              size="medium"
+              onClick={buytheTea}
+              disabled={isClaiming}
+            >
+              Support{" "}
+              {!isClaiming ? (
+                `${tea} Tea`
+              ) : (
+                <Lottie
+                  animationData={loadingAnimation}
+                  style={{ height: 40 }}
+                />
+              )}
+            </button>
           </Card>
         </div>
         <div>

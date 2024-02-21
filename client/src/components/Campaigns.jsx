@@ -81,6 +81,7 @@ function Campaign({ camp }) {
   const navigate = useNavigate();
   return (
     <Card
+      className="cards"
       onClick={() => {
         navigate("/buy/" + camp.campaignId);
       }}

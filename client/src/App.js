@@ -86,7 +86,13 @@ function App() {
         />
         <Route
           path="/buy/:campId"
-          element={<Buy wallet={wallet} tokenBalance={tokenBalance} />}
+          element={
+            <Buy
+              wallet={wallet}
+              tokenBalance={tokenBalance}
+              setTokenBalance={setTokenBalance}
+            />
+          }
         />
         <Route path="/admin" element={<Admin wallet={wallet} />} />
         <Route path="/campaigns" element={<Campaigns />} />
