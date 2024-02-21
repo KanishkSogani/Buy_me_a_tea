@@ -7,7 +7,7 @@ import { toastError, toastSuccess } from "../utils/toastWrapper";
 import loadingAnimation from "../assets/loadingAnimation.json";
 
 function Admin({ wallet }) {
-  const [id, setId] = useState("");
+  const [id, setId] = useState();
   const [teas, setTeas] = useState("");
 
   // useEffect(() => {

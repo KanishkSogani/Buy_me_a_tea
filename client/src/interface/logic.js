@@ -32,9 +32,9 @@ const CreateCampaign = async (wallet, teaPrice) => {
   return ixResponse.result();
 };
 
-const BuyTea = async (wallet, id, amount) => {
+const BuyTea = async (wallet, id, amount, name) => {
   const logicDriver = await getLogicDriver(logicId, wallet);
-  const ixResponse = await logicDriver.routines.BuyTea(id, amount);
+  const ixResponse = await logicDriver.routines.BuyTea(id, amount, name);
   return ixResponse.wait();
 };
 
