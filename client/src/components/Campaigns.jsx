@@ -88,19 +88,29 @@ function Campaign({ camp }) {
         backgroundColor: "#F5F9FF",
       }}
     >
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <p
-          style={{ fontSize: 20, fontFamily: "monospace" }}
+          style={{ fontSize: 25, fontFamily: "monospace" }}
         >{`Campaign ID: ${camp.campaignId}`}</p>
       </div>
       <div style={{ display: "flex" }}>
         <p
-          style={{ fontSize: 20, fontFamily: "monospace" }}
-        >{`Tea Price: ${camp.teaPrice} `}</p>
+          style={{
+            fontSize: 20,
+            fontFamily: "monospace",
+            marginTop: "2vh",
+            marginBottom: 5,
+          }}
+        >{`Tea Price: ${camp.teaPrice}$ `}</p>
       </div>
       <div style={{ display: "flex" }}>
         <p
-          style={{ fontSize: 20, fontFamily: "monospace" }}
+          style={{
+            fontSize: 20,
+            fontFamily: "monospace",
+            marginTop: 0,
+            marginBottom: 10,
+          }}
         >{`Total Tea: ${camp.totalTeas} `}</p>
       </div>
       {/* <div style={{ display: "flex" }}>
