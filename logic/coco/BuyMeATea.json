@@ -10,7 +10,7 @@
       "kind": "constant",
       "data": {
         "type": "u64",
-        "value": "0x032710"
+        "value": "0x0364"
       }
     },
     {
@@ -18,7 +18,7 @@
       "kind": "constant",
       "data": {
         "type": "i64",
-        "value": "0x030e10"
+        "value": "0x030258"
       }
     },
     {
