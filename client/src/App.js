@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import logic from "./interface/logic";
 import Buy from "./components/Buy";
 import Admin from "./components/Admin";
+import Campaigns from "./components/Campaigns";
 
 function App() {
   const [wallet, setWallet] = useState();
@@ -87,10 +88,11 @@ function App() {
           }
         />
         <Route
-          path="/buy"
+          path="/buy/:campId"
           element={<Buy wallet={wallet} tokenBalance={tokenBalance} />}
         />
         <Route path="/admin" element={<Admin wallet={wallet} />} />
+        <Route path="/campaigns" element={<Campaigns />} />
       </Routes>
     </div>
   );

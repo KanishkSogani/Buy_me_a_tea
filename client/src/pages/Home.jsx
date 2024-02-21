@@ -97,7 +97,7 @@ function Home() {
       <button
         className="button donatebut"
         onClick={() => {
-          navigate("/buy");
+          navigate("/campaigns");
         }}
       >
         See Campaign <i></i>

@@ -4,24 +4,24 @@ import Lottie from "lottie-react";
 import donateAnimation from "../assets/donateAnimation.json";
 import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
+import { useParams } from "react-router-dom";
 
 function Buy({ wallet, tokenBalance }) {
+  const { campId } = useParams();
   const [tea, setTea] = useState(1);
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
-  const [address, setAddress] = useState();
   const [message, setMessage] = useState("");
 
   const buytheTea = async () => {
     try {
-      await logic.BuyTea(wallet, address, tea);
+      await logic.BuyTea(wallet, campId, tea);
       toastSuccess(`Successfully Donated ${tea} Teas`);
       setName("");
       setTea(1);
       setMessage("");
-      setAddress("");
     } catch (error) {
-      toastError(`Please Connect Wallet`);
+      toastError(`Error Occurred `);
     }
   };
 
@@ -86,7 +86,7 @@ function Buy({ wallet, tokenBalance }) {
               fullWidth="true"
             />
             <br />
-            <input
+            {/* <input
               className="inputBox"
               onChange={(e) => {
                 setAddress(e.target.value);
@@ -96,7 +96,7 @@ function Buy({ wallet, tokenBalance }) {
               variant="outlined"
               fullWidth="true"
             />
-            <br />
+            <br /> */}
             <input
               className="inputBox"
               onChange={(e) => {
@@ -121,7 +121,7 @@ function Buy({ wallet, tokenBalance }) {
             />
             <br />
             <Button variant="contained" size="medium" onClick={buytheTea}>
-              Support {amount}$
+              Support {tea > 0 ? `${tea} tea` : ` `}
             </Button>
           </Card>
         </div>
