@@ -24,9 +24,13 @@ function Campaigns() {
   }, []);
 
   useEffect(() => {
-    if (camps[0].campaignId == 0) {
-      console.log(camps);
-      setIsloading(false);
+    try {
+      if (camps[0].campaignId == 0) {
+        console.log(camps);
+        setIsloading(false);
+      }
+    } catch {
+      toastError("Please create Campaign Id");
     }
   }, [camps]);
 

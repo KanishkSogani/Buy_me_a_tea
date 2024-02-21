@@ -24,6 +24,7 @@ function Admin({ wallet }) {
       const campid = CreatedCampaign.campaignId;
       setId(campid);
       toastSuccess(`Your Campaign ID is Generated`);
+      setTeas("");
     } catch (error) {
       toastError(`Please Connect Wallet`);
     }
@@ -63,6 +64,7 @@ function Admin({ wallet }) {
               }}
               placeholder="Enter Your Tea Price"
               fullWidth="true"
+              value={teas}
             />
             <button
               className="button-30"
