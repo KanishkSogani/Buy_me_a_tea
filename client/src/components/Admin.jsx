@@ -24,7 +24,7 @@ function Admin({ wallet }) {
       const campid = CreatedCampaign.campaignId;
       setId(campid);
       toastSuccess(`Your Campaign ID is Generated`);
-      setTeas("");
+      setTeas();
     } catch (error) {
       toastError(`Please Connect Wallet`);
     }
