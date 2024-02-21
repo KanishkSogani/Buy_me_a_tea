@@ -100,7 +100,7 @@ function Home() {
           navigate("/buy");
         }}
       >
-        Donate Now <i></i>
+        See Campaign <i></i>
       </button>
 
       <button

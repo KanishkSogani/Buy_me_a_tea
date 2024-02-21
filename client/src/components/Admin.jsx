@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
 
-function Admin({ wallet, teas, Setteas }) {
+function Admin({ wallet }) {
   const [id, setId] = useState("");
-  const [camps, setcamps] = useState([{}]);
+  // const [camps, setcamps] = useState([{}]);
+  const [teas, setTeas] = useState("");
 
   // useEffect(() => {
   //   const initdata = async () => {
@@ -19,29 +20,30 @@ function Admin({ wallet, teas, Setteas }) {
 
   const createcamp = async () => {
     try {
-      const { CreatedCampaign } = await logic.CreateCampaign(wallet, 5);
+      const { CreatedCampaign } = await logic.CreateCampaign(wallet, teas);
       const campid = CreatedCampaign.campaignId;
-      toastSuccess(`Your Campaign ID is ${campid}`);
+      setId(campid);
+      toastSuccess(`Your Campaign ID is Generated`);
     } catch (error) {
       toastError(`Please Connect Wallet`);
     }
   };
 
-  const campDetail = async () => {
-    try {
-      const { campaigns } = await logic.GetCampaigns();
-      setcamps(campaigns);
-      // toastSuccess(`Total amount of Tea recieved is ${camps[id].totalTeas}`);
-    } catch (error) {
-      toastError(`Please Enter Amount`);
-    }
-  };
+  // const campDetail = async () => {
+  //   try {
+  //     const { campaigns } = await logic.GetCampaigns();
+  //     setcamps(campaigns);
+  //     // toastSuccess(`Total amount of Tea recieved is ${camps[id].totalTeas}`);
+  //   } catch (error) {
+  //     toastError(`Please Enter Amount`);
+  //   }
+  // };
 
-  useEffect(() => {
-    if (camps && camps[id]) {
-      toastSuccess(`Total amount of Tea received is ${camps[id].totalTeas}`);
-    }
-  }, [camps]);
+  // useEffect(() => {
+  //   if (camps && camps[id]) {
+  //     toastSuccess(`Total amount of Tea received is ${camps[id].totalTeas}`);
+  //   }
+  // }, [camps]);
 
   return (
     <>
@@ -53,16 +55,36 @@ function Admin({ wallet, teas, Setteas }) {
           />
           <div style={{ position: "absolute", left: "40vw", top: "30vh" }}>
             <h3>Create your Campaign ID!</h3>
+            <input
+              style={{ position: "relative", top: "2vh" }}
+              className="inputBox2"
+              onChange={(e) => {
+                setTeas(e.target.value);
+              }}
+              placeholder="Enter Your Tea Price"
+              fullWidth="true"
+            />
             <button
               className="button-30"
-              style={{ position: "relative", marginTop: "3vh" }}
+              style={{ position: "relative", top: "3vh" }}
               onClick={createcamp}
             >
               Create ID
             </button>
+            <div
+              style={{
+                fontFamily: "monospace",
+                textAlign: "center",
+                fontSize: 30,
+                fontWeight: 400,
+                marginTop: "20vh",
+              }}
+            >
+              {id > 0 ? `Your Campaign ID is ${id}` : ``}
+            </div>
           </div>
         </div>
-        <div style={{ paddingTop: "35vh" }}>
+        {/* <div style={{ paddingTop: "35vh" }}>
           <Lottie
             style={{ height: 300, position: "absolute", right: "10vw" }}
             animationData={loginAnimation}
@@ -88,7 +110,7 @@ function Admin({ wallet, teas, Setteas }) {
               Enter
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

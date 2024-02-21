@@ -15,11 +15,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tokenDetails, setTokenDetails] = useState({});
   const [tokenBalance, setTokenBalance] = useState();
-  const [teas, setTeas] = useState("");
-
-  const Setteas = (e) => {
-    setTeas(e);
-  };
 
   useEffect(() => {
     const getTokenDetails = async () => {
@@ -95,10 +90,7 @@ function App() {
           path="/buy"
           element={<Buy wallet={wallet} tokenBalance={tokenBalance} />}
         />
-        <Route
-          path="/admin"
-          element={<Admin wallet={wallet} teas={teas} Setteas={Setteas} />}
-        />
+        <Route path="/admin" element={<Admin wallet={wallet} />} />
       </Routes>
     </div>
   );
