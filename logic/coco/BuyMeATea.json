@@ -143,6 +143,11 @@
             "slot": 4,
             "label": "totalTeas",
             "type": "u64"
+          },
+          {
+            "slot": 5,
+            "label": "creator",
+            "type": "string"
           }
         ],
         "methods": []
@@ -1050,6 +1055,11 @@
             "slot": 0,
             "label": "teaPrice",
             "type": "u64"
+          },
+          {
+            "slot": 1,
+            "label": "creator",
+            "type": "string"
           }
         ],
         "returns": [
@@ -1127,6 +1137,13 @@
             82,
             1,
             4,
+            0,
+            4,
+            0,
+            1,
+            82,
+            1,
+            5,
             0,
             36,
             0,

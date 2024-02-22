@@ -18,6 +18,7 @@ class TeaCampaign:
     field contributors Map[String]U64   //Contributors Name => Amount
     field teaPrice U64
     field totalTeas U64
+    field creator String
 
 const CLAIM_AMOUNT U64 = 100
 const CLAIM_INTERVAL I64 = 600  // every 1 hour
@@ -104,11 +105,11 @@ endpoint invokable Claim!():
 
 
 
-endpoint invokable CreateCampaign!(teaPrice U64) -> (CreatedCampaign TeaCampaign):
+endpoint invokable CreateCampaign!(teaPrice U64, creator String) -> (CreatedCampaign TeaCampaign):
     if teaPrice <= 0:
      throw "Invalid Price"
     
-    var newTeaCampaign = TeaCampaign{owner : Address(Sender), contributors : make(Map[String]U64) ,teaPrice: teaPrice, totalTeas : 0}
+    var newTeaCampaign = TeaCampaign{owner : Address(Sender), contributors : make(Map[String]U64) ,teaPrice: teaPrice, totalTeas : 0, creator: creator}
 
     mutate campaigns <- BuyMeATea.State.campaigns:
         newTeaCampaign.campaignId = len(campaigns)

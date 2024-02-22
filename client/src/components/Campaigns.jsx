@@ -88,7 +88,7 @@ function Campaign({ camp }) {
       style={{
         margin: 10,
         width: 400,
-        minHeight: 120,
+        minHeight: 110,
         padding: 20,
         backgroundColor: "#F5F9FF",
       }}
@@ -114,15 +114,20 @@ function Campaign({ camp }) {
             fontSize: 20,
             fontFamily: "monospace",
             marginTop: 0,
-            marginBottom: 10,
+            marginBottom: 5,
           }}
         >{`Total Tea: ${camp.totalTeas} `}</p>
       </div>
-      {/* <div style={{ display: "flex" }}>
+      <div style={{ display: "flex" }}>
         <p
-          style={{ fontSize: 20, fontFamily: "monospace" }}
-        >{`Owner: ${hexToBytes(camp.owner)} `}</p>
-      </div> */}
+          style={{
+            fontSize: 20,
+            fontFamily: "monospace",
+            marginTop: 0,
+            marginBottom: 10,
+          }}
+        >{`Creator: ${camp.creator} `}</p>
+      </div>
     </Card>
   );
 }
