@@ -90,7 +90,12 @@ function Campaign({ camp }) {
         width: 400,
         minHeight: 110,
         padding: 20,
-        backgroundColor: "#F5F9FF",
+        // backgroundColor: "#F5F9FF",
+        // background: "linear-gradient(to top, #accbee 0%, #e7f0fd 100%)",
+        // background:
+        //   "radial-gradient(592px at 48.2% 50%, rgba(255, 255, 249, 0.6) 0%, rgb(160, 199, 254) 74.6%)",
+        background:
+          "linear-gradient(178.6deg, rgb(232, 245, 253) 3.3%, rgb(252, 253, 255) 109.6%)",
       }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>

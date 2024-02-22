@@ -66,7 +66,9 @@ function Buy({ wallet, tokenBalance }) {
               width: 350,
               minHeight: 200,
               padding: 20,
-              backgroundColor: "#F5F9FF",
+              // backgroundColor: "#F5F9FF",
+              background:
+                "linear-gradient(178.6deg, rgb(232, 245, 253) 3.3%, rgb(252, 253, 255) 109.6%)",
             }}
           >
             <p
