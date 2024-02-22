@@ -63,7 +63,7 @@ function Buy({ wallet, tokenBalance }) {
           <Card
             style={{
               margin: 10,
-              width: 400,
+              width: 350,
               minHeight: 200,
               padding: 20,
               backgroundColor: "#F5F9FF",
@@ -81,7 +81,7 @@ function Buy({ wallet, tokenBalance }) {
             </p>
             <br />
             <input
-              className="inputBox"
+              className="inputBox2"
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -103,7 +103,7 @@ function Buy({ wallet, tokenBalance }) {
             />
             <br /> */}
             <input
-              className="inputBox"
+              className="inputBox2"
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
@@ -114,7 +114,7 @@ function Buy({ wallet, tokenBalance }) {
             />
             <br />
             <input
-              className="inputBox"
+              className="inputBox2"
               onChange={(e) => {
                 setAmount(e.target.value * 5);
                 setTea(e.target.value);

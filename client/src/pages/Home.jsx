@@ -120,7 +120,7 @@ function Home() {
             // height: "50vh",
             width: "20vw",
             bottom: "2vh",
-            left: "10vh",
+            left: "13vh",
           }}
         />
       </div>
@@ -133,6 +133,7 @@ function Home() {
             width: "35vw",
             bottom: "5vh",
             right: "0vh",
+            pointerEvents: "none",
           }}
         />
       </div>

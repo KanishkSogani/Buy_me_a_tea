@@ -31,7 +31,7 @@ body {
   overflow-x: hidden;
   position: relative;
   font-family: var(--font-satoshi-regular);
-  background-color: #fbf9f0;
+  background-color: #ffffff;
 }
 
 * {
@@ -220,6 +220,9 @@ header {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid hsl(219, 9%, 45%, 0.25);
+  /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+    rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+    rgba(0, 0, 0, 0.07) 0px 16px 16px; */
 }
 
 .nav__header {
@@ -411,24 +414,24 @@ header {
 .creatorbut {
   position: absolute;
   text-align: center;
-  left: 35%;
+  left: 35vw;
   top: 80vh;
 }
 
 .donatebut {
   position: absolute;
   text-align: center;
-  left: 60%;
+  left: 65vw;
   top: 80vh;
 }
 
 .donate {
   position: relative;
-  right: 10vw;
+  right: 9.8vw;
 }
 .creator {
   position: relative;
-  left: 5.5vw;
+  left: 10.5vw;
 }
 
 i {
@@ -686,4 +689,7 @@ i {
   transform: scale(1.08);
   cursor: pointer;
   transition: transform 0.5s ease;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+    rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+    rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
