@@ -1,34 +1,88 @@
 import { Card, Button } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import donateAnimation from "../assets/donateAnimation.json";
 import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
 import { useParams } from "react-router-dom";
 import loadingAnimation from "../assets/loadingAnimation.json";
+import buyloadingAnimation from "../assets/buyloadingAnimation.json";
 
-function Buy({ wallet, tokenBalance }) {
+function Buy({ wallet, tokenBalance, setTokenBalance }) {
   const { campId } = useParams();
   const [tea, setTea] = useState(1);
   const [amount, setAmount] = useState(5);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [isClaiming, setClaiming] = useState(false);
+  const [isloading, setIsloading] = useState(true);
+  const [camps, setcamps] = useState([{}]);
+  const [teaprice, setTeaPrice] = useState(5);
+
+  useEffect(() => {
+    const initdata = async () => {
+      try {
+        const { campaigns } = await logic.GetCampaigns();
+        setcamps(campaigns);
+      } catch (error) {
+        toastError(error);
+      }
+    };
+    initdata();
+  }, []);
+
+  useEffect(() => {
+    try {
+      if (camps[0].campaignId == 0) {
+        // console.log(camps[campId].creatordetails);
+        setTeaPrice(camps[campId].teaPrice);
+        setAmount(teaprice);
+        console.log(teaprice);
+        setIsloading(false);
+      }
+    } catch {
+      toastError("Please create Campaign Id");
+    }
+  }, [camps]);
 
   const buytheTea = async () => {
     try {
-      setClaiming(true);
-      await logic.BuyTea(wallet, campId, tea, name);
-      toastSuccess(`Successfully Donated ${tea} Teas`);
-      setName("");
-      setTea(1);
-      setMessage("");
-      setClaiming(false);
+      if (name && message && tea > 0) {
+        const balance = tokenBalance;
+        const newTokenBalance = balance - amount;
+        setTokenBalance(newTokenBalance);
+        setClaiming(true);
+        await logic.BuyTea(wallet, campId, tea, name);
+        toastSuccess(`Successfully Donated ${tea} Teas`);
+        setName("");
+        setTea(1);
+        setMessage("");
+        setClaiming(false);
+        setAmount(teaprice);
+      } else {
+        toastError("Please fill all details.");
+      }
     } catch (error) {
       toastError(`Error Occurred `);
       setClaiming(false);
     }
   };
+
+  if (isloading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          top: "25vh",
+        }}
+      >
+        <Lottie style={{ width: 200 }} animationData={buyloadingAnimation} />
+      </div>
+    );
+  }
 
   return (
     <div className="basic" style={{ paddingRight: 0 }}>
@@ -49,7 +103,7 @@ function Buy({ wallet, tokenBalance }) {
             borderRadius: " 10px 0px 0px 10px",
           }}
         >
-          {tokenBalance > 0 ? `My Balance: ${tokenBalance}$` : `My Balance: `}
+          {tokenBalance > 0 ? `My Balance: ${tokenBalance} TT` : `My Balance: `}
         </div>
       </div>
       <div
@@ -91,6 +145,7 @@ function Buy({ wallet, tokenBalance }) {
               placeholder="Your Name"
               variant="outlined"
               fullWidth="true"
+              required={true}
             />
             <br />
             {/* <input
@@ -113,18 +168,20 @@ function Buy({ wallet, tokenBalance }) {
               placeholder="Send a Message"
               variant="outlined"
               fullWidth="true"
+              required={true}
             />
             <br />
             <input
               className="inputBox2"
               onChange={(e) => {
-                setAmount(e.target.value * 5);
+                setAmount(e.target.value * teaprice);
                 setTea(e.target.value);
               }}
               value={tea}
               placeholder="Tea Amount"
               variant="outlined"
               fullWidth="true"
+              required={true}
             />
             <br />
             <button
@@ -136,7 +193,7 @@ function Buy({ wallet, tokenBalance }) {
             >
               Support{" "}
               {!isClaiming ? (
-                `${tea} Tea`
+                `${amount} TT`
               ) : (
                 <Lottie
                   animationData={loadingAnimation}

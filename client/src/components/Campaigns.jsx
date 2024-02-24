@@ -5,7 +5,7 @@ import Lottie from "lottie-react";
 import searchAnimation from "../assets/searchAnimation.json";
 import { Card, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { hexToBytes } from "js-moi-sdk";
+// import { hexToBytes } from "js-moi-sdk";
 
 function Campaigns() {
   const [camps, setcamps] = useState([{}]);
@@ -129,7 +129,7 @@ function Campaign({ camp }) {
             fontSize: 20,
             fontFamily: "monospace",
             marginTop: 0,
-            marginBottom: 10,
+            marginBottom: 0,
           }}
         >{`Creator: ${camp.creator} `}</p>
       </div>
