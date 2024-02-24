@@ -148,6 +148,11 @@
             "slot": 5,
             "label": "creator",
             "type": "string"
+          },
+          {
+            "slot": 6,
+            "label": "creatordetails",
+            "type": "string"
           }
         ],
         "methods": []
@@ -1060,6 +1065,11 @@
             "slot": 1,
             "label": "creator",
             "type": "string"
+          },
+          {
+            "slot": 2,
+            "label": "creatordetails",
+            "type": "string"
           }
         ],
         "returns": [
@@ -1144,6 +1154,13 @@
             82,
             1,
             5,
+            0,
+            4,
+            0,
+            2,
+            82,
+            1,
+            6,
             0,
             36,
             0,

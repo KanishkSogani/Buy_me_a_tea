@@ -670,12 +670,35 @@ i {
   background: #dee1e2;
   display: block;
   height: 40px;
-  width: 100%;
+  width: 20vw;
 }
 .inputBox2:hover {
   border-color: #ccc;
 }
 .inputBox2:focus {
+  border-color: #9147ff;
+  background: #fff;
+}
+
+.inputBox3 {
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 6px;
+  line-height: 1.5;
+  padding: 5px 10px;
+  transition: box-shadow 100ms ease-in, border 100ms ease-in,
+    background-color 100ms ease-in;
+  border: 2px solid #dee1e2;
+  color: rgb(14, 14, 16);
+  background: #dee1e2;
+  display: block;
+  height: 100px;
+  width: 20vw;
+}
+.inputBox3:hover {
+  border-color: #ccc;
+}
+.inputBox3:focus {
   border-color: #9147ff;
   background: #fff;
 }

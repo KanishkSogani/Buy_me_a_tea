@@ -14,50 +14,33 @@ function Admin({ wallet }) {
   const [teas, setTeas] = useState("");
   const [isClaiming, setClaiming] = useState(false);
   const [creator, setCreator] = useState("");
-
-  // useEffect(() => {
-  //   const initdata = async () => {
-  //     const { campaigns } = await logic.GetCampaigns();
-  //     setcamps(campaigns);
-  //   };
-  //   initdata();
-  // }, []);
+  const [creatordetails, setCreatorDetails] = useState("");
 
   const createcamp = async () => {
     try {
-      setClaiming(true);
-      const { CreatedCampaign } = await logic.CreateCampaign(
-        wallet,
-        teas,
-        creator
-      );
-      const campid = CreatedCampaign.campaignId;
-      setId(campid);
-      toastSuccess(`Your Campaign ID is Generated`);
-      setTeas("");
-      setCreator("");
-      setClaiming(false);
+      if (creator && teas && creatordetails) {
+        setClaiming(true);
+        const { CreatedCampaign } = await logic.CreateCampaign(
+          wallet,
+          teas,
+          creator,
+          creatordetails
+        );
+        const campid = CreatedCampaign.campaignId;
+        setId(campid);
+        toastSuccess(`Your Campaign ID is Generated`);
+        setTeas("");
+        setCreator("");
+        setCreatorDetails("");
+        setClaiming(false);
+      } else {
+        toastError("Please fill all details.");
+      }
     } catch (error) {
       toastError(`Error Occured`);
       setClaiming(false);
     }
   };
-
-  // const campDetail = async () => {
-  //   try {
-  //     const { campaigns } = await logic.GetCampaigns();
-  //     setcamps(campaigns);
-  //     // toastSuccess(`Total amount of Tea recieved is ${camps[id].totalTeas}`);
-  //   } catch (error) {
-  //     toastError(`Please Enter Amount`);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (camps && camps[id]) {
-  //     toastSuccess(`Total amount of Tea received is ${camps[id].totalTeas}`);
-  //   }
-  // }, [camps]);
 
   return (
     <>
@@ -67,44 +50,62 @@ function Admin({ wallet }) {
             style={{ height: 300, position: "absolute", left: "10vw" }}
             animationData={createcampAnimation}
           />
-          <div style={{ position: "absolute", left: "40vw", top: "30vh" }}>
-            <h3>Create your Campaign ID!</h3>
-            <input
-              style={{ position: "relative", top: "2vh" }}
-              className="inputBox2"
-              value={creator}
-              onChange={(e) => {
-                setCreator(e.target.value);
-              }}
-              placeholder="Enter Creator Name"
-              fullWidth="true"
-            />
-            <br />
-            <input
-              style={{ position: "relative", top: ".5vh" }}
-              className="inputBox2"
-              value={teas}
-              onChange={(e) => {
-                setTeas(e.target.value);
-              }}
-              placeholder="Enter Your Tea Price"
-              fullWidth="true"
-            />
-            <button
-              className="button-30"
-              style={{ position: "relative", top: "3vh" }}
-              onClick={createcamp}
-              disabled={isClaiming}
-            >
-              Create ID
-            </button>
+          <div style={{ position: "absolute", left: "40vw", top: "20vh" }}>
+            <h3 style={{ marginLeft: "0vw" }}>Create your Campaign!</h3>
+            <form>
+              <input
+                style={{ position: "relative", top: "2vh" }}
+                className="inputBox2"
+                value={creator}
+                onChange={(e) => {
+                  setCreator(e.target.value);
+                }}
+                placeholder="Enter Creator Name"
+                fullWidth="true"
+                required={true}
+              />
+              <br />
+              <textarea
+                style={{ position: "relative", top: ".5vh" }}
+                className="inputBox3"
+                value={creatordetails}
+                onChange={(e) => {
+                  setCreatorDetails(e.target.value);
+                }}
+                placeholder="Enter Creator Details"
+                fullWidth="true"
+                rows={4}
+                required={true}
+              />
+              <input
+                style={{ position: "relative", top: "2vh" }}
+                className="inputBox2"
+                value={teas}
+                onChange={(e) => {
+                  setTeas(e.target.value);
+                }}
+                placeholder="Enter Your Tea Price"
+                fullWidth="true"
+                required={true}
+              />
+              <br />
+              <button
+                className="button-30"
+                style={{ position: "relative", top: "3vh" }}
+                onClick={createcamp}
+                disabled={isClaiming}
+                type="submit"
+              >
+                Create Campaign
+              </button>
+            </form>
             <div
               style={{
                 fontFamily: "monospace",
                 textAlign: "center",
                 fontSize: 30,
                 fontWeight: 400,
-                marginTop: "15vh",
+                marginTop: "10vh",
               }}
             >
               {id >= 0 ? (

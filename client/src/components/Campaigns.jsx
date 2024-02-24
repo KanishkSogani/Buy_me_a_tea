@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import logic from "../interface/logic";
 import { toastError, toastSuccess } from "../utils/toastWrapper";
 import Lottie from "lottie-react";
-import loadingAnimation from "../assets/loadingAnimation.json";
+import searchAnimation from "../assets/searchAnimation.json";
 import { Card, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { hexToBytes } from "js-moi-sdk";
@@ -46,7 +46,7 @@ function Campaigns() {
           top: "30vh",
         }}
       >
-        <Lottie animationData={loadingAnimation} />
+        <Lottie animationData={searchAnimation} />
       </div>
     );
   }
@@ -111,7 +111,7 @@ function Campaign({ camp }) {
             marginTop: "2vh",
             marginBottom: 5,
           }}
-        >{`Tea Price: ${camp.teaPrice}$ `}</p>
+        >{`Tea Price: ${camp.teaPrice} TT `}</p>
       </div>
       <div style={{ display: "flex" }}>
         <p

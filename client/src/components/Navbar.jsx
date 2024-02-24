@@ -62,15 +62,14 @@ const Navbar = ({
         }
       >
         <Link to={"/home"}>Home</Link>
-        <Link to={"/faucet"}>Claim Faucet</Link>
-        <a
-          href={"https://moi.technology"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Built on MOI
-        </a>
-        {wallet && <button className="btn">{tokenBalance} $</button>}
+        <Link to={"/admin"}>Create Campaign</Link>
+        <Link to={"/campaigns"}>See Campaigns</Link>
+        <Link to={"/faucet"}>Claim TT</Link>
+        {wallet && (
+          <button className="btn">
+            {tokenBalance} {tokenDetails.symbol}
+          </button>
+        )}
         <button
           className="connect-button"
           onClick={wallet ? () => updateWallet() : () => showConnectModal(true)}

@@ -78,7 +78,10 @@ const Faucet = ({
                 <div className=""></div>
                 <div className="">
                   <div className="">Available Limit</div>
-                  <h1>{refillTime === "00:00:00" ? claimAmount : 0} $</h1>
+                  <h1>
+                    {refillTime === "00:00:00" ? claimAmount : 0}{" "}
+                    {tokenDetails.symbol}
+                  </h1>
                 </div>
               </div>
               <div className="">
@@ -89,7 +92,7 @@ const Faucet = ({
                   className="btn btn--blue"
                   onClick={onClaimHandler}
                 >
-                  <span>Claim Tokens</span>
+                  <span>Claim Tea Tokens</span>
                   <Loader loading={isClaiming} size={25} color="#fff" />
                 </button>
                 {isClaiming && (
