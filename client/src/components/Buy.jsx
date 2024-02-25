@@ -252,7 +252,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
                     minHeight: 180,
                     maxHeight: 180,
                     padding: 20,
-                    backgroundColor: " #F7F9FE",
+                    // backgroundColor: " #F7F9FE",
                     overflowY: "auto",
                     className: "style-2",
                   }}
@@ -265,6 +265,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
                         justifyContent: "center",
                         alignContent: "center",
                         marginTop: "5vh",
+                        // backgroundColor: " #F7F9FE",
                       }}
                     >{`Be the first one to support ${camps[campId].creator}`}</div>
                   ) : (
@@ -279,6 +280,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
                             padding: 10,
                             borderRadius: 10,
                             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                            backgroundColor: " #F7F9FE",
                           }}
                         >
                           <div

@@ -26,7 +26,7 @@ function Campaigns() {
   useEffect(() => {
     try {
       if (camps[0].campaignId == 0) {
-        console.log(camps);
+        // console.log(camps);
         setIsloading(false);
       }
     } catch (error) {

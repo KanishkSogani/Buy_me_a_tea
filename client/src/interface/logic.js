@@ -9,7 +9,7 @@ const constructBaseWallet = async () => {
     process.env.REACT_APP_BASE_MNEMONIC,
     "m/44'/6174'/7020'/0/0"
   );
-  console.log(wallet.getAddress());
+  // console.log(wallet.getAddress());
   return wallet;
 };
 
