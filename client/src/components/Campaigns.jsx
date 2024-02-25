@@ -17,7 +17,7 @@ function Campaigns() {
         const { campaigns } = await logic.GetCampaigns();
         setcamps(campaigns);
       } catch (error) {
-        toastError(error);
+        toastError(error.message);
       }
     };
     initdata();
@@ -29,7 +29,7 @@ function Campaigns() {
         console.log(camps);
         setIsloading(false);
       }
-    } catch {
+    } catch (error) {
       toastError("Please create Campaign Id");
     }
   }, [camps]);

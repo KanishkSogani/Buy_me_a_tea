@@ -37,8 +37,10 @@ function Admin({ wallet }) {
         toastError("Please fill all details.");
       }
     } catch (error) {
-      toastError(error.message);
-      setClaiming(false);
+      !wallet ? toastError("Please Connect Wallet") : toastError(error.message);
+      setTimeout(() => {
+        setClaiming(false);
+      }, 2000);
     }
   };
 
@@ -118,7 +120,7 @@ function Admin({ wallet }) {
                       fontFamily: "cursive",
                     }}
                   >
-                    <span>See other Campaigns</span>
+                    <span>Check Your Campaign</span>
                     <div>
                       <Lottie
                         style={{ height: 40 }}
@@ -128,7 +130,7 @@ function Admin({ wallet }) {
                     <button
                       className="button-30"
                       onClick={() => {
-                        navigate("/campaigns");
+                        navigate("/buy/" + id);
                       }}
                     >
                       Click Here!

@@ -31,7 +31,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
         const { campaigns } = await logic.GetCampaigns();
         setcamps(campaigns);
       } catch (error) {
-        toastError(error);
+        toastError(error.message);
       }
     };
     initdata();
@@ -50,8 +50,8 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
         console.log(contrimap);
         setIsloading(false);
       }
-    } catch {
-      toastError("Please create Campaign Id");
+    } catch (error) {
+      toastError(error.message);
     }
   }, [camps]);
 
@@ -74,7 +74,9 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
         toastError("Please fill all details.");
       }
     } catch (error) {
-      toastError(error.message);
+      !wallet
+        ? toastError("Please connect your wallet")
+        : toastError(error.message);
       setClaiming(false);
     }
   };
@@ -220,6 +222,8 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
               margin: 10,
               width: 500,
               minHeight: 400,
+              // maxHeight: 400,
+              // overflowy: "auto",
               padding: 20,
               // backgroundColor: "#F5F9FF",
               background:
@@ -235,7 +239,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
             <div
               style={{
                 border: "1px dotted black",
-                marginTop: "5vh",
+                marginTop: "3.5vh",
               }}
             ></div>
             <div style={{ marginTop: "3.5vh" }}>
