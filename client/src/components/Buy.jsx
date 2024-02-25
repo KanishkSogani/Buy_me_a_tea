@@ -11,13 +11,13 @@ import buyloadingAnimation from "../assets/buyloadingAnimation.json";
 function Buy({ wallet, tokenBalance, setTokenBalance }) {
   const { campId } = useParams();
   const [tea, setTea] = useState(1);
-  const [amount, setAmount] = useState(5);
+  const [amount, setAmount] = useState();
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [isClaiming, setClaiming] = useState(false);
   const [isloading, setIsloading] = useState(true);
   const [camps, setcamps] = useState([{}]);
-  const [teaprice, setTeaPrice] = useState(5);
+  const [teaprice, setTeaPrice] = useState();
   const [contrimap, setContrimap] = useState(new Map());
   const [contributor, setContributor] = useState([]);
 
