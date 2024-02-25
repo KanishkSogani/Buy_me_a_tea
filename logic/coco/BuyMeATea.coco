@@ -120,6 +120,8 @@ endpoint invokable CreateCampaign!(teaPrice U64, creator String, creatordetails 
 
 endpoint invokable BuyTea!(campaignId U64,teaUnits U64, name String):
     mutate campaigns <- BuyMeATea.State.campaigns:
+        if campaigns[campaignId].owner == Address(Sender):
+            throw "Owner cannot contribute to his own campaign"
         campaigns[campaignId].totalTeas += teaUnits
         campaigns[campaignId].contributors[name] += teaUnits 
         transfer!(from : Address(Sender), to : campaigns[campaignId].owner ,value : teaUnits * campaigns[campaignId].teaPrice )

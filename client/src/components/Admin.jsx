@@ -37,7 +37,7 @@ function Admin({ wallet }) {
         toastError("Please fill all details.");
       }
     } catch (error) {
-      toastError(`Error Occured`);
+      toastError(error.message);
       setClaiming(false);
     }
   };

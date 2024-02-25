@@ -58,12 +58,12 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
   const buytheTea = async () => {
     try {
       if (name && message && tea > 0) {
-        const balance = tokenBalance;
-        const newTokenBalance = balance - amount;
-        setTokenBalance(newTokenBalance);
         setClaiming(true);
         await logic.BuyTea(wallet, campId, tea, name);
         toastSuccess(`Successfully Donated ${tea} Teas`);
+        const balance = tokenBalance;
+        const newTokenBalance = balance - amount;
+        setTokenBalance(newTokenBalance);
         setName("");
         setTea(1);
         setMessage("");
@@ -74,7 +74,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
         toastError("Please fill all details.");
       }
     } catch (error) {
-      toastError(`Error Occurred `);
+      toastError(error.message);
       setClaiming(false);
     }
   };
