@@ -231,7 +231,6 @@ header {
 /* Navbar */
 
 .navbar {
-  position: sticky;
   padding: 0 2rem;
   top: 0;
   margin-bottom: 50px;

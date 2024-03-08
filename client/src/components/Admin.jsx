@@ -86,7 +86,7 @@ function Admin({ wallet }) {
                 onChange={(e) => {
                   setTeas(e.target.value);
                 }}
-                placeholder="Enter Your Tea Price"
+                placeholder="Enter Your Tea Price in TT"
                 fullWidth="true"
                 required={true}
               />
