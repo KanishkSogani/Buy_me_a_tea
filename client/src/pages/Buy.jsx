@@ -17,7 +17,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
   const [isClaiming, setClaiming] = useState(false);
   const [isloading, setIsloading] = useState(true);
   const [camps, setcamps] = useState([{}]);
-  const [teaprice, setTeaPrice] = useState(5);
+  const [teaprice, setTeaPrice] = useState();
   const [contrimap, setContrimap] = useState(new Map());
   const [contributor, setContributor] = useState([]);
 
@@ -206,7 +206,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
             >
               Support{" "}
               {!isClaiming ? (
-                `${amount} TT`
+                `${teaprice} TT`
               ) : (
                 <Lottie
                   animationData={loadingAnimation}

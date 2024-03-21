@@ -7,9 +7,9 @@ import Navbar from "./components/Navbar";
 import Faucet from "./pages/Faucet";
 import Home from "./pages/Home";
 import logic from "./interface/logic";
-import Buy from "./components/Buy";
-import Admin from "./components/Admin";
-import Campaigns from "./components/Campaigns";
+import Buy from "./pages/Buy";
+import Admin from "./pages/Admin";
+import Campaigns from "./pages/Campaigns";
 
 function App() {
   const [wallet, setWallet] = useState();
