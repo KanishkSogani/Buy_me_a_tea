@@ -11,7 +11,7 @@ import buyloadingAnimation from "../assets/buyloadingAnimation.json";
 function Buy({ wallet, tokenBalance, setTokenBalance }) {
   const { campId } = useParams();
   const [tea, setTea] = useState(1);
-  const [amount, setAmount] = useState(5);
+  const [amount, setAmount] = useState(1);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [isClaiming, setClaiming] = useState(false);
@@ -187,7 +187,6 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
             <input
               className="inputBox2"
               onChange={(e) => {
-                setAmount(e.target.value * teaprice);
                 setTea(e.target.value);
               }}
               value={tea}
@@ -206,7 +205,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
             >
               Support{" "}
               {!isClaiming ? (
-                `${teaprice} TT`
+                `${teaprice * tea} TT`
               ) : (
                 <Lottie
                   animationData={loadingAnimation}
