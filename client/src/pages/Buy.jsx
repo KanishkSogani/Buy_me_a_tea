@@ -81,7 +81,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
     }
   };
 
-  if (isloading) {
+  if (contributor) {
     return (
       <div
         style={{
