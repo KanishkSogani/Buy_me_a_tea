@@ -188,6 +188,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
               className="inputBox2"
               onChange={(e) => {
                 setTea(e.target.value);
+                setAmount(e.target.value * teaprice);
               }}
               value={tea}
               placeholder="Tea Amount"
