@@ -81,7 +81,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
     }
   };
 
-  if (contributor) {
+  if (isloading) {
     return (
       <div
         style={{
@@ -105,7 +105,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
           flexDirection: "row-reverse",
         }}
       >
-        <div
+        {/* <div
           style={{
             fontSize: 20,
             // backgroundColor: "black",
@@ -117,7 +117,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
           }}
         >
           {tokenBalance > 0 ? `My Balance: ${tokenBalance} TT` : `My Balance: `}
-        </div>
+        </div> */}
       </div>
       <div
         style={{
@@ -227,6 +227,7 @@ function Buy({ wallet, tokenBalance, setTokenBalance }) {
               // backgroundColor: "#F5F9FF",
               background:
                 "linear-gradient(178.6deg, rgb(232, 245, 253) 3.3%, rgb(252, 253, 255) 109.6%)",
+              marginTop: "10vh",
             }}
           >
             <div
