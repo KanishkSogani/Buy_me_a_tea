@@ -136,11 +136,11 @@ function Home() {
             pointerEvents: "none",
           }}
         />
-        <footer
+        {/* <footer
           style={{ position: "absolute", bottom: "1vh", textAlign: "center" }}
         >
           Built with ❤️ on MOI
-        </footer>
+        </footer> */}
       </div>
       {/* <p
         style={{
